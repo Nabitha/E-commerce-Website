@@ -10,6 +10,8 @@ import x from "../../Assets/images/X.svg"
 import instagram from "../../Assets/images/insta.svg"
 import down from "../../Assets/images/icons down.svg"
 import pinkdown from "../../Assets/images/pink down.svg"
+import Productlist from "../../Components/ProductList"
+import Cart from "../../Components/Cart"
 interface PropsTypes {
     children?: React.ReactNode;
 
@@ -61,9 +63,8 @@ const Layout = ({children}:PropsTypes) => {
          </div>
         
         {/* BODY OF PAGE */}
-        <div className="bg-gray-500 h-48">
-        {children}
-        </div>
+        <Cart/>
+        
         {/* footer full */}
         <div>
             {/* main footer  */}
