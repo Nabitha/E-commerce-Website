@@ -43,15 +43,21 @@ const Layout = ({children}:PropsTypes) => {
                 {/* left white itemd  */}
                 <div className="flex space-x-16">
                 <span><img src={logo}/></span>
-                <span className="flex space-x-4">
+                <span className="flex space-x-4 font-medium text-gray-900 ">
                 <span className="flex hover:text-pink-500">Home </span>
                 <span className="hover:text-pink-500">Products</span>
                 <span className="hover:text-pink-500">Blog</span>
                 <span className="hover:text-pink-500">Shop</span>
-                <span className="hover:text-pink-500">Contact</span></span>
+                <span className="hover:text-pink-500 0">Contact</span></span>
                 </div>
                 <span><input type="text" className="border-2 border-blueGray-200" /> <button className="bg-pink-500 h-7 px-1 absolute"><img src={search}/></button></span>
             </div>
+         </div>
+         {/* heading */}
+         <div className="bg-violet-50 h-36 grid ">
+           <span className="self-center ml-32"> <div className="text-indigo-900 font-medium text-2xl ">My Account</div>
+            <div className="font-medium"><span>Home </span><span>. Pages </span><span className="text-pink-500"> . My Account</span></div>
+            </span>
          </div>
         
         {/* BODY OF PAGE */}
