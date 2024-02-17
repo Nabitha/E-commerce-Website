@@ -19,8 +19,12 @@ interface PropsTypes <FormData>{
     validateFunction: (d:FormData)=>SchemaValidationResponse;
     onSubmit: (data:FormData)=>void;
     formSubmitButtonLabel: string;
+    formBackButtonLabel?:string;
+    formSigninButton?:string;
     serverError?:ValidationError[];
     afterFormSection?:ReactNode;
+    onBack?:()=>void;
+
 }
 
 const Form = <FormData extends Record<string,any>,>({
@@ -31,7 +35,10 @@ const Form = <FormData extends Record<string,any>,>({
     onSubmit,
     serverError,
     formSubmitButtonLabel,
-    afterFormSection
+    formBackButtonLabel,
+    formSigninButton,
+    afterFormSection,
+    onBack
 }:PropsTypes<FormData>) => {
 
     const {
@@ -46,6 +53,8 @@ const Form = <FormData extends Record<string,any>,>({
         validateFunction,
         onSubmit,
         serverError
+        
+        
     })
 
   return (
@@ -63,11 +72,29 @@ const Form = <FormData extends Record<string,any>,>({
         )}
         </div>
         {afterFormSection}
-        <Button
+        <div className="flex gap-44 pt-2 items-center">
+            
+        {/* {formBackButtonLabel &&  */}
+        {/* <Button
+                      label={formBackButtonLabel || ""}
+                      onClick={onBack}
+                      disabled={!valid}
+                      type="Inline" />
+                    
+        } */}
+        <Button 
             label={formSubmitButtonLabel}
             action="submit"
             disabled={!valid}
+            type="Primary"
         />
+       
+
+        
+        
+    
+    </div>
+
     </form>
   )
 }

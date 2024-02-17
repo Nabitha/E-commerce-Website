@@ -59,7 +59,7 @@ const InputField = ({
           onChange={(e) => onChange(e.target.value, e)}
           disabled={disabled}
           onBlur={onBlur}
-          className="rounded-sm border p-2 w-80  font-normal text-xs"
+          className="rounded-sm border w-full p-2 font-normal text-xs"
           placeholder={placeholder}
         />
       )}
