@@ -27,8 +27,8 @@ const Layout = ({children}:PropsTypes) => {
                 <button className="p-1 rounded right-0 absolute"><img className="w-6" src={search} />
                 </button>
                 </div>
-            <div className="flex  gap-4">
-                <span className="flex gap-1">Login<img src={login}/></span> 
+            <div className="flex  gap-4"><Link to="/login">
+                <span className="flex gap-1">Login<img src={login}/></span> </Link>
                 <span className="flex gap-1">Wishlist<img src={heart}/></span>
                 <span>
                 <Link to="/cart"><img src={cart}/></Link></span>
