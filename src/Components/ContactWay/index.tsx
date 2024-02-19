@@ -8,9 +8,9 @@ interface Props {
 
 export const ContactWay = ({image,content}:Props) => {
   return (
-    <div className='flex p-8 gap-4 w-96 '>
+    <div className='flex p-8 gap-4 '>
       <img src={image}/>
-      <p className=''>{content}</p>
+      <p>{content}</p>
        
 
     </div>
