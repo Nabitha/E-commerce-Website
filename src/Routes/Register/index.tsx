@@ -3,7 +3,7 @@ import { HomePageScreen } from '../../Components/Screens/HomePageScreen'
 import { validateRegister } from '../../Validation'
 import Form from '../../Components/InfraStructure/Form'
 import { Link } from 'react-router-dom'
-import Button from '../../Components/Button'
+
 
 export const Register = () => {
   return (

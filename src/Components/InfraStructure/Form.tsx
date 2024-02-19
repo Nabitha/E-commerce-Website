@@ -20,7 +20,6 @@ interface PropsTypes <FormData>{
     onSubmit: (data:FormData)=>void;
     formSubmitButtonLabel: string;
     formBackButtonLabel?:string;
-    formSigninButton?:string;
     serverError?:ValidationError[];
     afterFormSection?:ReactNode;
     onBack?:()=>void;
@@ -36,7 +35,6 @@ const Form = <FormData extends Record<string,any>,>({
     serverError,
     formSubmitButtonLabel,
     formBackButtonLabel,
-    formSigninButton,
     afterFormSection,
     onBack
 }:PropsTypes<FormData>) => {

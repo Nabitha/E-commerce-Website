@@ -3,11 +3,11 @@ type PropsTypes = {
     value?: string;
     label?: string;
 };
-const Label = ({type,value,label}:PropsTypes) => {
+const Label = ({label}:PropsTypes) => {
   return (
-    <label
-        className="border-4"
-    >
+    <label>
+        
+   
         {label}
 
     </label>
