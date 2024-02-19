@@ -38,8 +38,7 @@ const Cart = () => {
 
         }
     ])
-    return (<>
-    {/* full div  */}
+    return (
     <div className="flex  justify-center">
         {/* cart  */}
         <div className="grid" >
@@ -81,8 +80,5 @@ const Cart = () => {
                 <button className="bg-green-500 w-full text-white p-1 rounded">Proceed To Checkout</button>
             </div>
         </div>
-    </div>
-    
-    
-    </>)}
+    </div>)}
 export default Cart
