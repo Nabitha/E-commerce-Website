@@ -20,7 +20,7 @@ const Button = ({
 
   return (
     <button
-      className=""
+      className=" "
       onClick={() => !loading && onClick?.()}
       type={action}
       disabled={loading || disabled}
