@@ -1,36 +1,18 @@
 import Form from "../../Components/InfraStructure/Form";
+import ProductCard from "../ProductCard";
 
-import { validateRegister } from "../../Validation"
+import { validateRegister } from "../../Validation";
+import MoreDetails from "../MoreDetails";
+import RelatedProducts from "../RelatedProducts";
 
 const Home = () => {
   return (
-    <div className="form-container">
-      <Form
-        formStructure = {[
-            {
-                field: "name",
-                label: "Name"
-            },
-            {
-                field: "email",
-                label: "Email"
-            },
-            {
-                field: "phone",
-                label: "Phone"
-            }
-        ]}
-        emptyForm={{
-          name:"",
-          email:"",
-          phone:""
-        }}
-        validateFunction={validateRegister}
-        onSubmit={(d)=>console.log(d)}
-      />
+    <div className="flex flex-col justify-center items-center">
+      <ProductCard />
+      <MoreDetails />
+      <RelatedProducts />
     </div>
-  )
-  
-}
+  );
+};
 
-export default Home
+export default Home;
