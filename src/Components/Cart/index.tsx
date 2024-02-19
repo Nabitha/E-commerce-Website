@@ -39,7 +39,7 @@ const Cart = () => {
         }
     ])
     return (
-    <div className="flex  justify-center">
+    <div className="flex justify-center">
         {/* cart  */}
         <div className="grid" >
           {/* heading  */}
@@ -73,7 +73,6 @@ const Cart = () => {
             <div className="text-center  text-indigo-900 font-medium">Cart Totals</div>
             {/* first box  */}
             <div className="bg-violet-50 p-4">
-                
                 <div className="text-indigo-900 font-semibold flex space-x-36 py-4"><span>Subtotals:</span><span>$219.00</span></div>
                 <div className="text-indigo-900 font-semibold flex space-x-44 py-4"><span>Totals:</span><span>$325.00</span></div>
                 <div className="text-gray-400 font-normal flex"><img src={check} className="w-3 mx-2"/>Shipping & taxes calculated at checkout</div><br/>
