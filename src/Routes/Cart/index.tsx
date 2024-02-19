@@ -41,7 +41,7 @@ const Cart = () => {
     ])
     return (    
     <div className="flex justify-center">
-        <div className="grid" >
+        <div className="grid " >
            <div className="grid grid-cols-5 place-items-center text-indigo-900 font-medium pb-5">
              <span>Product</span>
              <span>Price</span>
@@ -64,7 +64,7 @@ const Cart = () => {
              <span><img className="w-5" src={closebutton}/></span>
              </>))}
             </div>
-            <div className="flex justify-end pr-20">
+            <div className="flex place-self-end mt-4 w-52  pr-20">
             <Button label="Clear Cart" type="Primary"></Button>
             </div>
         </div>
