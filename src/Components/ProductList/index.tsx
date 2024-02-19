@@ -70,8 +70,6 @@ const [productitem,setProductItem]=useState([
                     <option value="Besttoday">Today</option>
                     <option value="Bestmonth">BestMonth</option>
                 </select></form> </div>
-            <div className="flex items-center gap-2 self-start space-x-2 mx-2">View: <img src={grid} /><img src={list} /></div>
-            <div> <input type="text" className="w-30 border border-gray-300"/></div>
         </div>
 
 
