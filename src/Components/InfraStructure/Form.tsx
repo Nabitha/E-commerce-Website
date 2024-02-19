@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import useForm, { ValidationError } from "../../Hooks/useForms";
 import { InputFieldType } from "../../Types/PropsTypes";
 import { SchemaValidationResponse } from "../../Utils/Validation";
@@ -6,8 +7,9 @@ import InputField from "../Input"
 
 type FormField = {
     field:string;
-    label:string;
+    label?:string;
     type?:InputFieldType
+    placeholder?:string;
 }
 
 interface PropsTypes <FormData>{
@@ -16,8 +18,12 @@ interface PropsTypes <FormData>{
     formStructure:FormField[];
     validateFunction: (d:FormData)=>SchemaValidationResponse;
     onSubmit: (data:FormData)=>void;
-    formSubmitButtonLabel?: string;
+    formSubmitButtonLabel: string;
+    formBackButtonLabel?:string;
     serverError?:ValidationError[];
+    afterFormSection?:ReactNode;
+    onBack?:()=>void;
+
 }
 
 const Form = <FormData extends Record<string,any>,>({
@@ -27,7 +33,10 @@ const Form = <FormData extends Record<string,any>,>({
     validateFunction,
     onSubmit,
     serverError,
-    formSubmitButtonLabel= "Submit"
+    formSubmitButtonLabel,
+    formBackButtonLabel,
+    afterFormSection,
+    onBack
 }:PropsTypes<FormData>) => {
 
     const {
@@ -42,12 +51,16 @@ const Form = <FormData extends Record<string,any>,>({
         validateFunction,
         onSubmit,
         serverError
+        
+        
     })
 
   return (
-    <form onSubmit={submit}>
+    <form className="p-8"
+     onSubmit={submit}>
+        <div className="grid gap-8">
         {formStructure.map((field)=>
-            <InputField
+            <InputField 
                 {...field}
                 key={field.field}
                 value={formData[field.field]}
@@ -55,11 +68,31 @@ const Form = <FormData extends Record<string,any>,>({
                 error={formError[field.field]}
             />
         )}
-        <Button
+        </div>
+        {afterFormSection}
+        <div className="flex gap-44 pt-4 items-center">
+            
+        {/* {formBackButtonLabel &&  */}
+        {/* <Button
+                      label={formBackButtonLabel || ""}
+                      onClick={onBack}
+                      disabled={!valid}
+                      type="Inline" />
+                    
+        } */}
+        <Button 
             label={formSubmitButtonLabel}
             action="submit"
             disabled={!valid}
+            type="Primary"
         />
+       
+
+        
+        
+    
+    </div>
+
     </form>
   )
 }

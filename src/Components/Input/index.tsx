@@ -15,6 +15,7 @@ type PropsTypes = {
   disabled?: boolean;
   onChange: (value: string, e: any) => void;
   submitted?: boolean;
+  placeholder?:string;
 };
 
 const InputField = ({
@@ -22,9 +23,11 @@ const InputField = ({
   label,
   error,
   value,
+  placeholder,
   onChange,
   disabled = false,
   submitted = false,
+
 }: PropsTypes) => {
   const [isBlurred, setIsBlurred] = useState<boolean>(false);
 
@@ -38,7 +41,7 @@ const InputField = ({
 
   return (
     <Layout error={error} isBlurred={isBlurred} type={type}>
-      <Label label={label} type={type} value={value} />
+    
       {type === "textarea" ? (
         <textarea
           title={label}
@@ -56,6 +59,8 @@ const InputField = ({
           onChange={(e) => onChange(e.target.value, e)}
           disabled={disabled}
           onBlur={onBlur}
+          className="rounded-sm border w-full p-2 font-normal text-xs"
+          placeholder={placeholder}
         />
       )}
     </Layout>
