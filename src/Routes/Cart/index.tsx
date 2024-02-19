@@ -1,7 +1,6 @@
 import silverbag from "../../Assets/images/silver bag.svg"
 import check from "../../Assets/images/check.svg"
 import closebutton from "../../Assets/images/xbutton.svg"
-import Layout from "../../Components/Layout"
 import { useState } from "react"
 import Button from "../../Components/Button"
 const Cart = () => {
@@ -42,16 +41,13 @@ const Cart = () => {
     ])
     return (    
     <div className="flex justify-center">
-        {/* cart  */}
         <div className="grid" >
-          {/* heading  */}
-           <div className="grid grid-cols-5 place-items-center text-indigo-900 font-medium ">
+           <div className="grid grid-cols-5 place-items-center text-indigo-900 font-medium pb-5">
              <span>Product</span>
              <span>Price</span>
              <span>Quantity</span>
              <span>Total</span>
             </div>
-              {/* datas */}
             <div className="grid grid-cols-5 place-items-center gap-2 border-b border-gray-200  ">
             {cartitem.map((setCart,index)=>(<>                
              <span className="relative flex gap-2"><img src={setCart.image}/> 
@@ -72,10 +68,8 @@ const Cart = () => {
             <Button label="Clear Cart" type="Primary"></Button>
             </div>
         </div>
-        {/* right items  */}
         <div>
-            <div className="text-center  text-indigo-900 font-medium">Cart Totals</div>
-            {/* first box  */}
+            <div className="text-center  text-indigo-900 font-medium pb-5">Cart Totals</div>
             <div className="grid gap-2 bg-violet-50 p-4">
                 <div className="text-indigo-900 font-semibold flex justify-between py-4"><span>Subtotals:</span><span>$219.00</span></div>
                 <div className="text-indigo-900 font-semibold flex justify-between py-4"><span>Totals:</span><span>$325.00</span></div>

@@ -9,10 +9,8 @@ const Router = () => {
   return (
     <Layout>
       <Routes>
-          <Route path="" element={<Home/>} />
           <Route path="/cart" element={<Cart/>} />
           <Route path="/products" element={<Productlist/>} />
-          <Route path="/hello" element={<div>Hello</div>} />
       </Routes>
     </Layout>
   )

@@ -8,8 +8,6 @@ import bluecart from "../../Assets/images/blue_cart.svg"
 import blueheart from "../../Assets/images/blue-heat.svg"
 import bluepluse from "../../Assets/images/blue-pluse.svg"
 import { useState } from "react"
-
-
 const Productlist = () =>{
 const [hoveritem,setHoveritem]=useState([
     {image:bluecart
@@ -18,7 +16,6 @@ const [hoveritem,setHoveritem]=useState([
     },
     {image:bluepluse
     },
-
 ])
 const [productitem,setProductItem]=useState([
             {
@@ -55,15 +52,11 @@ const [productitem,setProductItem]=useState([
                 color:"ColorBrown",
                 price:"26.00",
                 oldprice:"42.00"
-    
             }
         ])
     return(<>
-{/* full div  */}
 <div>
-    {/* head  */}
     <div className="flex gap-36 justify-center p-4">
-        {/* heading  */}
         <div>
             <div className="text-indigo-900 font-medium text-lg">Ecommerce Acceories & Fashion item </div><div className="text-gray-400 font-normal text-sm         ">About 9,620 results (0.62 seconds)</div>
         </div>
@@ -78,15 +71,10 @@ const [productitem,setProductItem]=useState([
                     <option value="Bestmonth">BestMonth</option>
                 </select> </div>
         </div>
-
-
     </div>
-    {/* products  */}
     <div className="grid grid-cols-4 gap-2 space-y-5 place-items-center">
-        {/* 1 Product */}
         {productitem.map((setProduct,index)=>(
         <div>
-            {/* image  */}
             <div className="group relative bg-gray-100 grid place-items-center hover:bg-gray-300 h-60 w-60 ">
           <div className="absolute left-4 bottom-3 grid space-y-2 hidden group-hover:grid ">
             {hoveritem.map((setHoveritem,i)=>(
@@ -95,8 +83,6 @@ const [productitem,setProductItem]=useState([
           </div>
           <img src={setProduct.image} className="w-44"/>
           </div>
-
-            {/* description  */}
             <div className="grid place-items-center ">
                 <div className="text-indigo-900 font-bold">{setProduct.name}</div>
                 <div><img src={color} /></div>
