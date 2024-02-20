@@ -7,6 +7,7 @@ import { ForgotPassword } from "./Home/ForgotPassword"
 import { Register } from "./Register"
 import { OrderCompleted } from "./OrderCompleted"
 import { ContactUs } from "./ContactUs"
+import ProductDetails from "./ProductDetails";
 
 
 const Router = () => {
@@ -20,9 +21,12 @@ const Router = () => {
         <Route path="/register" element={<Register/>}/>
         <Route path="/ordercompleted" element={<OrderCompleted/>}/>
         <Route path="/contactus" element={<ContactUs/>}/>
+        <Route path="/ProductDetails" element={<ProductDetails />} />
+
       </Routes>
     </Layout>
   )
 }
 
-export default Router
+
+export default Router;
