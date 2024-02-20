@@ -10,6 +10,8 @@ import { ContactUs } from "./ContactUs";
 import ProductDetails from "./ProductDetails";
 import ResetPassword from "./ResetPassword";
 import Wishlist from "./Wishlist";
+import { OtpVerification } from "./OtpVerification"
+
 
 const Router = () => {
   return (
@@ -25,6 +27,7 @@ const Router = () => {
         <Route path="/ProductDetails" element={<ProductDetails />} />
         <Route path="/ResetPassword" element={<ResetPassword />} />
         <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/otpverification" element={<OtpVerification/>}/>
       </Routes>
     </Layout>
   );

@@ -18,7 +18,7 @@ export const HomePageScreen = ({title,subtitle,children,link,linkLabel}:Props) =
         <div className='font-medium text-2xl place-content-center'>{title}</div>
         <div className='font-normal text-xs text-slate-400'>{subtitle}</div>
         {children}
-       <div className='font-normal text-md text-slate-400'>
+       <div className='font-normal grid place-items-center text-md text-slate-400'>
          <Link to={link ||  ""}>{linkLabel}</Link>
          </div>
         </div>

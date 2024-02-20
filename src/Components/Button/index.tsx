@@ -23,14 +23,14 @@ const Button = ({
     () =>
     ({
       
-      Primary: `bg-pink-500 p-2 w-full rounded-sm
+      Primary: `bg-pink-500 p-2 text-base w-full rounded-sm
     text-white cursor-pointer hover:opacity-90
     transition-all `,
-      Inline: `text-black  p w-full rounded-sm
+      Inline: `text-black bg-pink-500 p-2 rounded-sm
   text-white cursor-pointer hover:opacity-90
   transition-all`,
       Secondary:
-          'text-slate-700 p-3 w-full cursor-pointer hover:opacity-90'
+          'text-slate-700 p-3  cursor-pointer hover:opacity-90'
   })[type],
 [type]
 );
