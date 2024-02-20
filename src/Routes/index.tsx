@@ -9,6 +9,7 @@ import { OrderCompleted } from "./OrderCompleted";
 import { ContactUs } from "./ContactUs";
 import ProductDetails from "./ProductDetails";
 import ResetPassword from "./ResetPassword";
+import Wishlist from "./Wishlist";
 
 const Router = () => {
   return (
@@ -23,6 +24,7 @@ const Router = () => {
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/ProductDetails" element={<ProductDetails />} />
         <Route path="/ResetPassword" element={<ResetPassword />} />
+        <Route path="/wishlist" element={<Wishlist />} />
       </Routes>
     </Layout>
   );

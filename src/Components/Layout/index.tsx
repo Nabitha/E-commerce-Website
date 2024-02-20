@@ -32,14 +32,17 @@ const Layout = ({children}:PropsTypes) => {
                 <button className="p-1 rounded right-0 absolute"><img className="w-6" src={search} />
                 </button>
                 </div>
-            <div className="flex  gap-4"><Link to="/login">
-                <span className={`${("/login"===pathName)?'text-pink-500 flex gap-1':' flex gap-1 hover:text-pink-500'}`}>Login<img src={login}/></span> </Link>
-                <span className="hover:text-pink-500 flex gap-1">Wishlist<img src={heart}/></span>
+            <div className="flex  gap-4">
+                <Link to="/login">
+                <span className={`${("/login"===pathName)?'text-pink-500 flex gap-1':' flex gap-1 hover:text-pink-500'}`}>Login<img src={login}/></span>
+                 </Link>
+                 <Link to="/wishlist">
+                <span className={`${("/wishlist"===pathName)?'text-pink-500 flex gap-1':' flex gap-1 hover:text-pink-500'}`}>Wishlist<img src={heart}/></span>
+                </Link>
                 <span>
                 <Link to="/cart"><img src={cart}/></Link></span>
             </div>
-         </div>
-                
+         </div>     
             <div className="flex gap-96 py-2 justify-center">         
             </div>
         <div className="py-8 px-8">
