@@ -1,19 +1,16 @@
 import Hoveritem from "../../Components/Hoverimg"
-import bluecart from "../../Assets/images/blue_cart.svg"
-import blueheart from "../../Assets/images/blue-heat.svg"
-import bluepluse from "../../Assets/images/blue-pluse.svg"
 import { useState } from "react"
-import color from "../../Assets/images/color.svg"
 interface PropsTypes{
     image:string,
     names:string,
-    price:string,
+    price:string | number,
     first:string,
     second:string,
-    third:string
+    third:string,
+    color?:string
 }
 
-const Product = ({image,names,price,first,second,third}:PropsTypes ) => {
+const Product = ({image,names,price,first,second,third,color}:PropsTypes ) => {
     const [iszoom, setIsZoom] = useState(false);
 const Zooming = () => {
     setIsZoom((prev) => !prev);
@@ -34,7 +31,7 @@ onClick={() => {
 <img src={image} className={`${(iszoom)?' w-full':'w-44'}`}/>
 </div>
 <div className="grid place-items-center ">
-    <div className="text-indigo-900 font-bold">{names}</div>
+    <div className="text-indigo-900 font-bold w-56 text-center">{names}</div>
     <div><img src={color} /></div>
     <div><span className="text-indigo-900 font-normal">${price} </span>
     </div>
