@@ -7,6 +7,7 @@ import { ForgotPassword } from "./Home/ForgotPassword"
 import { Register } from "./Register"
 import { OrderCompleted } from "./OrderCompleted"
 import { ContactUs } from "./ContactUs"
+import { OtpVerification } from "./OtpVerification"
 
 
 const Router = () => {
@@ -20,6 +21,7 @@ const Router = () => {
         <Route path="/register" element={<Register/>}/>
         <Route path="/ordercompleted" element={<OrderCompleted/>}/>
         <Route path="/contactus" element={<ContactUs/>}/>
+        <Route path="/otpverification" element={<OtpVerification/>}/>
       </Routes>
     </Layout>
   )

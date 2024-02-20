@@ -72,14 +72,9 @@ const Form = <FormData extends Record<string,any>,>({
         {afterFormSection}
         <div className="flex gap-44 pt-4 items-center">
             
-        {/* {formBackButtonLabel &&  */}
-        {/* <Button
-                      label={formBackButtonLabel || ""}
-                      onClick={onBack}
-                      disabled={!valid}
-                      type="Inline" />
+        
                     
-        } */}
+        
         <Button 
             label={formSubmitButtonLabel}
             action="submit"
