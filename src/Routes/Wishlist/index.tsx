@@ -6,6 +6,7 @@ import bag from "../../Assets/images/bag.svg"
 import bluecart from "../../Assets/images/blue_cart.svg"
 import bluedelete from "../../Assets/images/delete-button.svg"
 import bluepluse from "../../Assets/images/blue-pluse.svg"
+import Product from "../../Components/Product"
 import { useState } from "react"
 import Hoveritem from "../../Components/Hoverimg"
 const Wishlist = () =>{
@@ -50,23 +51,9 @@ const [productitem,setProductItem]=useState([
 <div>
     <div className="grid grid-cols-4 gap-2 space-y-5 place-items-center">
         {productitem.map((setProduct,index)=>(
-        <div>
-            <div className="group relative bg-gray-100 grid place-items-center hover:bg-gray-300 h-60 w-60 rounded-2xl ">
-          <div className="absolute left-4 bottom-3 grid space-y-2 hidden group-hover:grid  ">
-            
-            <Hoveritem icon={bluecart}/>
-            <Hoveritem icon={bluedelete}/>
-            <Hoveritem icon={bluepluse}/>
-         
-            
-          </div>
-          <img src={setProduct.image} className="w-44"/>
-          </div>
-            <div className="grid place-items-center ">
-                <div className="text-indigo-900 font-bold">{setProduct.name}</div>
-                <div className="text-indigo-900 font-normal">${setProduct.price}</div>
-            </div>
-        </div>  ))}     
+      <Product image={setProduct.image} names={setProduct.name} price={setProduct.price} first={bluecart}
+      second={bluedelete} third={bluepluse}/>  
+      ))}     
     </div>
 </div>
 </>)}

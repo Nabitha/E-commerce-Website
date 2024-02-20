@@ -8,8 +8,14 @@ import bluecart from "../../Assets/images/blue_cart.svg"
 import blueheart from "../../Assets/images/blue-heat.svg"
 import bluepluse from "../../Assets/images/blue-pluse.svg"
 import Hoveritem from "../../Components/Hoverimg"
+import Product from "../../Components/Product"
 import { useState } from "react"
 const Productlist = () =>{
+const [iszoom, setIsZoom] = useState(false);
+const Zooming = () => {
+    setIsZoom((prev) => !prev);
+  };
+
 const [productitem,setProductItem]=useState([
             {
                 image: chair,
@@ -67,21 +73,9 @@ const [productitem,setProductItem]=useState([
     </div>
     <div className="grid grid-cols-4 gap-2 space-y-5 place-items-center">
         {productitem.map((setProduct,index)=>(
-        <div>
-            <div className="group relative bg-gray-100 grid place-items-center hover:bg-gray-300 h-60 w-60 ">
-          <div className="absolute left-4 bottom-3 grid space-y-2 hidden group-hover:grid ">
-           <Hoveritem icon={bluecart}/>
-            <Hoveritem icon={blueheart}/>
-            <Hoveritem icon={bluepluse}/>
-          </div>
-          <img src={setProduct.image} className="w-44"/>
-          </div>
-            <div className="grid place-items-center ">
-                <div className="text-indigo-900 font-bold">{setProduct.name}</div>
-                <div><img src={color} /></div>
-                <div><span className="text-indigo-900 font-normal">${setProduct.price} </span><span className="text-pink-500">${setProduct.oldprice}</span></div>
-            </div>
-        </div>  ))}     
+      <Product image={setProduct.image} names={setProduct.name} price={setProduct.price} first={bluecart}
+       second={blueheart} third={bluepluse} />  
+    ))}     
     </div>
 </div>
 </>)}
