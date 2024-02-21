@@ -2,22 +2,22 @@ import React, { useState } from "react";
 import SubProfile1 from "../../Asset/SubProfile1.svg";
 import SubProfile2 from "../../Asset/SubProfile2.svg";
 import SubProfile3 from "../../Asset/SubProfile3.svg";
-import MainProfile from "../../Asset/MainProfile.svg";
 import favorite from "../../Asset/favoriteIcon.svg";
 import favoriteRedIcon from "../../Asset/favoriteRedIcon.svg";
 import Related from "../../Asset/related.svg";
 import cartIcon from "../../Asset/cartIcon.svg";
 import { useParams } from "react-router-dom";
 import useFetch from "../../Hooks/useFetch";
-import { AboutProduct } from "../../Services";
+import { AboutProduct, Addcart, Addwishlist } from "../../Services";
 
 const ProductDetails = () => {
   const params = useParams();
-  const { data,error,loading } = useFetch<any>(AboutProduct(params.id || ""));
-  console.log("hjkh",data)
+  const { data, error, loading } = useFetch<any>(AboutProduct(params.id || ""));
+  console.log("hjkh", data?._id);
   const [fav, setFav] = useState(true);
-  if(error)return(<div>error 404</div>)
-  if(loading)return(<div className="bg-blue-500 text-red-500">Loading . . . </div>)
+  if (error) return <div>error 404</div>;
+  if (loading)
+    return <div className="bg-blue-500 text-red-500">Loading . . . </div>;
   return (
     <div className="grid gap-10 place-items-center m-4">
       <div
@@ -39,13 +39,12 @@ const ProductDetails = () => {
           <div>{data?.price}</div>
           <div>{data?.quantity}</div>
           <div>{data?.color}</div>
-          <div>
-          {data?.description}
-          </div>
+          <div>{data?.description}</div>
           <div id="buttons" className="flex gap-4 font-semibold">
             <div
               id="Add-to-wishlist"
               className="flex p-2 gap-5 justify-center shadow-md hover:cursor-pointer w-fit bg-cyan-200 rounded-sm"
+              onClick={() => Addcart(data?._id)}
             >
               Add to Cart
               <img src={cartIcon} alt="" />
@@ -53,6 +52,7 @@ const ProductDetails = () => {
             <div
               id="Add-to-wishlist"
               className="flex p-2 gap-5 justify-center shadow-md hover:cursor-pointer w-fit rounded-sm"
+              onClick={() => Addwishlist(data?._id)}
             >
               Add to Wishlist
               <img
