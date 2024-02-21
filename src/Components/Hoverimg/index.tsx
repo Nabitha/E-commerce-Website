@@ -12,7 +12,10 @@ const Hoveritem = ({
       return (
         <img
         className="rounded-full hover:bg-white p-2 w-9"
-          onClick={() =>onClick?.()}
+          onClick={(e) =>{
+            e.stopPropagation()
+            onClick?.()
+          }}
           src={icon}
        />
         

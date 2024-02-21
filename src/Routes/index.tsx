@@ -24,7 +24,7 @@ const Router = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/ordercompleted" element={<OrderCompleted />} />
         <Route path="/contactus" element={<ContactUs />} />
-        <Route path="/ProductDetails" element={<ProductDetails />} />
+        <Route path="/ProductDetails/:id" element={<ProductDetails />} />
         <Route path="/ResetPassword" element={<ResetPassword />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/otpverification" element={<OtpVerification/>}/>

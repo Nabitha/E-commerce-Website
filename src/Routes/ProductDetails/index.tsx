@@ -7,9 +7,17 @@ import favorite from "../../Asset/favoriteIcon.svg";
 import favoriteRedIcon from "../../Asset/favoriteRedIcon.svg";
 import Related from "../../Asset/related.svg";
 import cartIcon from "../../Asset/cartIcon.svg";
+import { useParams } from "react-router-dom";
+import useFetch from "../../Hooks/useFetch";
+import { AboutProduct } from "../../Services";
 
 const ProductDetails = () => {
+  const params = useParams();
+  const { data,error,loading } = useFetch<any>(AboutProduct(params.id || ""));
+  console.log("hjkh",data)
   const [fav, setFav] = useState(true);
+  if(error)return(<div>error 404</div>)
+  if(loading)return(<div className="bg-blue-500 text-red-500">Loading . . . </div>)
   return (
     <div className="grid gap-10 place-items-center m-4">
       <div
@@ -23,15 +31,16 @@ const ProductDetails = () => {
             <img src={SubProfile3} alt="" />
           </div>
           <div>
-            <img className="w-full" src={MainProfile} alt="" />
+            <img className="w-full" src={data?.image} alt="" />
           </div>
         </div>
         <div id="details" className="flex flex-col gap-2 m-4">
-          <div className="text-4xl font-bold">heading</div>
-          <div>color</div>
+          <div className="text-4xl font-bold">{data?.productName}</div>
+          <div>{data?.price}</div>
+          <div>{data?.quantity}</div>
+          <div>{data?.color}</div>
           <div>
-            short description-kjsadfkjbsncxcbhfjczxbnc
-            zdgsbdcjkzbcjkzgaxdjkn,xma bcbdhasgdcbjxzbchjgdvhxzbc nzdsdgbkd
+          {data?.description}
           </div>
           <div id="buttons" className="flex gap-4 font-semibold">
             <div
