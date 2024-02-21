@@ -9,6 +9,8 @@ export const Addwishlist = (id: string) =>
   postCall(`/user/add-wishlist`, { id });
 export const AboutProduct = (id: string) => `/user/product-detail?id=${id}`;
 export const RegisterSubmit = (data: any) => postCall(`/auth/sign-up`, data);
-export const loginCall = postCall(`/auth/login`);
-export const forgotPassword = postCall(`/auth/forgot-password-sendOtp`);
-export const otpVerification = postCall(`/auth/verify-otp`);
+export const loginCall = (data: object) => postCall(`/auth/login`, data);
+export const forgotPassword = (data: object) =>
+  postCall(`/auth/forgot-password-sendOtp`, data);
+export const otpVerification = (email: string, otp: string) =>
+  postCall(`/auth/verify-otp`, { email, otp });

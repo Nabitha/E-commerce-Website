@@ -16,9 +16,9 @@ export const OtpVerification = () => {
     const onSubmit= async ({ otp }: { otp: string })=>{
       setSeverError(null);
   
-      const res=await otpVerification({ 
-        email: state?.email,
-        otp});
+      const res=await otpVerification(
+        state?.email,
+        otp);
       
       if (!res.status) {
          if (!res.status) {
