@@ -10,7 +10,7 @@ export const OtpVerification = () => {
     useEffect(() => {
         if (!state?.email) navigate('/forgotpassword');
     }, [state?.email]);
-    
+    const [error, setError] = useState('');
     const [serverError, setSeverError] = useState<any>(null);
     const navigate=useNavigate();
     const onSubmit= async ({ otp }: { otp: string })=>{
@@ -20,12 +20,17 @@ export const OtpVerification = () => {
         state?.email,
         otp);
       
-      if (!res.status) {
-         if (!res.status) {
-            setSeverError(res.data);
-            return false;
-        }
-      }
+     if (!res.status) {
+      res.data.forEach(
+        ({ path, message }: { path: string; message: string }) => {
+          if (path === "all") {console.log(message);
+          
+            setError(message);
+          }
+        },
+      );
+      return false;
+    }
       navigate('/ResetPassword')
      
       return true;
@@ -51,6 +56,7 @@ export const OtpVerification = () => {
     onSubmit={onSubmit}
     serverError={serverError}
     formSubmitButtonLabel="Verify OTP"
+    commonError={error}
     />
         
    </HomePageScreen>
