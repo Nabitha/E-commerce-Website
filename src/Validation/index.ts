@@ -7,3 +7,4 @@ export const validateRegister = (data:object)=> schemaValidation(data,RegisterSc
 export const ValidateLogin = (data:object)=> schemaValidation(data,LoginSchema)
 
 export const validateForgotPassword =(data:object)=> schemaValidation(data,ForgotPasswordSchema)
+

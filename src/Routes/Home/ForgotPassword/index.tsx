@@ -18,7 +18,9 @@ export const ForgotPassword = () => {
       if (!res.data.map(({ path }: { path: string }) => path).includes("otp"))
         return false;
     }
-    navigate('/otpverification')
+    navigate('/otpverification', {
+      state: data
+  });
    
     return true;
 

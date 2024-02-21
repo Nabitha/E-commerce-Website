@@ -12,4 +12,7 @@ export const LoginSchema = Joi.object({
 });
 export const ForgotPasswordSchema = Joi.object({
   email :  JoiRequiredEmail("Email"),
-})
+});
+export const OtpVerificationSchemaSchema = Joi.object({
+  email :  JoiRequiredEmail("otp"),
+});

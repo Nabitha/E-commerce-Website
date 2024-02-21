@@ -17,4 +17,4 @@ export interface ErrorPropsTypes {
     setData:Dispatch<SetStateAction<any | null>>
 }
 
-export type InputFieldType = "text" | "number" | "password" | "submit" | "button" | "textarea";
+export type InputFieldType = "text" | "number" | "password" | "submit" | "button" | "textarea" | "otp";
