@@ -39,8 +39,8 @@ const Zooming = () => {
     </div>
     <div className="grid grid-cols-4 gap-2 space-y-5 place-items-center">
         {data?.map((product,index)=>(
-            <Product key={index} image={product?.image} names={product?.productName} price={product.price} first={bluecart}
-            third={bluepluse} color={color} id={product._id}/>  
+            <Product key={index} image={product?.image} names={product?.productName} price={product.price} 
+             color={color} id={product._id}/>  
             ))}     
     </div>
 </div>
