@@ -45,7 +45,7 @@ const Layout = ({children}:PropsTypes) => {
          </div>     
             <div className="flex gap-96 py-2 justify-center">         
             </div>
-        <div className="py-8 px-8">
+        <div className="p-8">
         {children}
         </div>
           <div className="pt-5">
