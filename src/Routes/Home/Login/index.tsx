@@ -1,18 +1,16 @@
 import React, { useState } from 'react'
 import Form from '../../../Components/InfraStructure/Form';
-import { validateRegister } from '../../../Validation';
+import { ValidateLogin, validateRegister } from '../../../Validation';
 import { HomePageScreen } from '../../../Components/Screens/HomePageScreen';
 import { Link, useNavigate } from 'react-router-dom';
 import { loginCall } from '../../../Services';
 
 
 export const Login = () => {
-  const [error,setError]=useState("");
+    const [error, setError] = useState('');
   const navigate=useNavigate();
-  console.log("h");
 
   const onSubmit= async (data:object)=>{
-    console.log("i");
     
     const res=await loginCall(data);
     if (!res.status) {
@@ -26,7 +24,7 @@ export const Login = () => {
       return false;
     }
     localStorage.setItem('token', res.data.token);
-    navigate('/otpverification')
+    navigate('/ProductDetails')
    
     return true;
 
@@ -55,7 +53,7 @@ export const Login = () => {
       }}
 
 
-      validateFunction={validateRegister}
+      validateFunction={ValidateLogin}
       onSubmit={onSubmit}
       formSubmitButtonLabel="Sign In"
       commonError={error}
