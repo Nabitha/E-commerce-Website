@@ -24,7 +24,7 @@ export const Login = () => {
       return false;
     }
     localStorage.setItem('token', res.data.token);
-    navigate('/ProductDetails')
+    navigate('/products')
    
     return true;
 
