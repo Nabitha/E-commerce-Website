@@ -3,11 +3,13 @@ import { HomePageScreen } from "../../Components/Screens/HomePageScreen";
 import { validateRegister } from "../../Validation";
 import Form from "../../Components/InfraStructure/Form";
 import { Link, useNavigate } from "react-router-dom";
+import { RegisterSubmit } from "../../Services";
 
 export const Register = () => {
   const navigate = useNavigate();
   const OnSubmit = async (data: any) => {
-    navigate("/auth/sign-up");
+    RegisterSubmit(data);
+    navigate("/login");
   };
   return (
     <div>
