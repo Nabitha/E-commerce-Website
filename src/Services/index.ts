@@ -9,3 +9,6 @@ export const Addwishlist = (id: string) =>
   postCall(`/user/add-wishlist`, { id });
 export const AboutProduct = (id: string) => `/user/product-detail?id=${id}`;
 export const RegisterSubmit = `/auth/sign-up`;
+export const loginCall = postCall(`/auth/login`);
+export const forgotPassword = postCall(`/auth/forgot-password-sendOtp`);
+export const otpVerification = postCall(`/auth/verify-otp`);

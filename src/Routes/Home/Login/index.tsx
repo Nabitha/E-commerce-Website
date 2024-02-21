@@ -1,11 +1,34 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Form from '../../../Components/InfraStructure/Form';
-import { validateRegister } from '../../../Validation';
+import { ValidateLogin, validateRegister } from '../../../Validation';
 import { HomePageScreen } from '../../../Components/Screens/HomePageScreen';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { loginCall } from '../../../Services';
 
 
 export const Login = () => {
+    const [error, setError] = useState('');
+  const navigate=useNavigate();
+
+  const onSubmit= async (data:object)=>{
+    
+    const res=await loginCall(data);
+    if (!res.status) {
+      res.data.forEach(
+        ({ path, message }: { path: string; message: string }) => {
+          if (path === "all") {
+            setError(message);
+          }
+        },
+      );
+      return false;
+    }
+    localStorage.setItem('token', res.data.token);
+    navigate('/ProductDetails')
+   
+    return true;
+
+  }
   return (
     
    <HomePageScreen title='Login'>
@@ -30,9 +53,10 @@ export const Login = () => {
       }}
 
 
-      validateFunction={validateRegister}
-      onSubmit={(d) => console.log(d)}
+      validateFunction={ValidateLogin}
+      onSubmit={onSubmit}
       formSubmitButtonLabel="Sign In"
+      commonError={error}
      
       afterFormSection={<div className='text-slate-400 text-xs p-4 text-left font-normal'>
         <div>

@@ -17,13 +17,13 @@ interface PropsTypes <FormData>{
     defaultValues?: FormData;
     formStructure:FormField[];
     validateFunction: (d:FormData)=>SchemaValidationResponse;
-    onSubmit: (data:FormData)=>void;
+    onSubmit: (data:any)=>void;
     formSubmitButtonLabel: string;
     formBackButtonLabel?:string;
     serverError?:ValidationError[];
     afterFormSection?:ReactNode;
     onBack?:()=>void;
-
+    commonError?:string
 }
 
 const Form = <FormData extends Record<string,any>,>({
@@ -34,9 +34,8 @@ const Form = <FormData extends Record<string,any>,>({
     onSubmit,
     serverError,
     formSubmitButtonLabel,
-    formBackButtonLabel,
     afterFormSection,
-    onBack
+    commonError
 }:PropsTypes<FormData>) => {
 
     const {
@@ -58,16 +57,22 @@ const Form = <FormData extends Record<string,any>,>({
   return (
     <form className="p-8"
      onSubmit={submit}>
+        {commonError && (
+                <div className=" text-sm text-red-600 my-8 p-2 border-l-2 border-red-600 bg-slate-200">
+                    {commonError}
+                </div>
+            )}
         <div className="grid gap-8">
         {formStructure.map((field)=>
-            <InputField 
+        {
+            return <InputField 
                 {...field}
                 key={field.field}
                 value={formData[field.field]}
                 onChange={(v)=>onChange(field.field,v)}
                 error={formError[field.field]}
             />
-        )}
+})}
         </div>
         {afterFormSection}
         <div className="flex gap-44 pt-4 items-center">
