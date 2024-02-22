@@ -8,6 +8,7 @@ import favoriteRedIcon from '../../Asset/favoriteRedIcon.svg'
 import bluepluse from "../../Assets/images/blue-pluse.svg"
 import bluecart from "../../Assets/images/blue_cart.svg"
 import fullbluecart from "../../Assets/images/fulbuecart.svg"
+import useFetch from "../../Hooks/useFetch"
 interface PropsTypes{
     image:string,
     names:string,
@@ -17,8 +18,9 @@ interface PropsTypes{
     wishstatus:boolean
     cartstatus:boolean
 }
-const Product = ({image,names,price,color,id,wishstatus,cartstatus}:PropsTypes ) => {
+// const { reload } = useFetch<PropsTypes[]>(wishlistdisplay);
 
+const Product = ({image,names,price,color,id,wishstatus,cartstatus}:PropsTypes) => {
     const navigate = useNavigate();
     const [fav, setFav] = useState(wishstatus);
     const [isOnCart,setIsOnCart] = useState(cartstatus);
@@ -43,7 +45,13 @@ const Product = ({image,names,price,color,id,wishstatus,cartstatus}:PropsTypes )
         setIsOnCart(true);
     }}
 />
-<Hoveritem icon={fav ?favoriteRedIcon: favorite} onClick={()=>{Addwishlist(id),setFav(!fav)}}/>
+<Hoveritem
+    icon={location.pathname === '/wishlist' ? favoriteRedIcon : (fav ? favoriteRedIcon : favorite)}
+    onClick={() => {
+        Addwishlist(id);
+        setFav(prevFav => !prevFav);
+    }}
+/>
 <Hoveritem icon={bluepluse} 
             
 onClick={() => {

@@ -18,10 +18,7 @@ interface DataType{
   _id: any;
 }[]
 const Cart = () => {
-
   const { data, reload } = useFetch<DataType[]>(cartdisplay);
-  console.log(data,"data");
-  
   const onClearCart = async () => {
     const res = await cartclear();
     if (res.status) {

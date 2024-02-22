@@ -2,6 +2,7 @@ import Product from "../../Components/Product"
 import useFetch from "../../Hooks/useFetch"
 import { wishlistclear, wishlistdisplay } from "../../Services"
 import Button from "../../Components/Button"
+import { useEffect } from "react"
 const Wishlist = () =>{
     const { data,reload } = useFetch<{
         image: string,
@@ -9,7 +10,7 @@ const Wishlist = () =>{
         price:number
         _id:any
         inCart:boolean
-        
+        inWishlist:boolean        
 }[]>(
     wishlistdisplay )
     console.log("din",data)
@@ -19,6 +20,10 @@ const Wishlist = () =>{
             reload();
         }
     }
+    useEffect(()=>{
+        reload()
+    },
+    [data])
     return(<>
 <div className="grid">
     <div className="place-self-end w-52 ">
@@ -32,6 +37,5 @@ const Wishlist = () =>{
       ))}     
     </div>
 </div>
-    {console.log("dd",data)}
 </>)}
 export default Wishlist

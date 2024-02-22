@@ -9,18 +9,38 @@ import pinkcart from "../../Assets/images/pinkcart.svg"
 import instagram from "../../Assets/images/insta.svg"
 import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react"
+import useFetch from "../../Hooks/useFetch"
+import { cartdisplay } from "../../Services"
 interface PropsTypes {
     children?: React.ReactNode;
 }
+interface DataType{
+    image: string;
+    productName: string;
+    price: number;
+    total: number;
+    color: string;
+    size: string;
+    quantity: number;
+    _id: any;
+  }[]
 const Layout = ({children}:PropsTypes) => {
     const location = useLocation();
     const [pathName, setPathName] = useState('');
+    const { data, reload } = useFetch<DataType[]>(cartdisplay);
+
     useEffect(()=>{
         setPathName(location.pathname)
     },[location.pathname])
+
+
+    useEffect(()=>{
+        reload()
+    },
+    [data])
     return (
         <>
-         <div className="bg-violet-600 text-white font-semibold flex items-center justify-around  py-4 pr-10"> 
+         <div className="sticky top-0 z-50 bg-violet-600 text-white font-semibold flex items-center justify-around  py-4 pr-10"> 
          <div className="flex items-center gap-16">
                 <span><img src={logo}/></span>
                 <span className="flex gap-4 font-medium  ">
@@ -35,13 +55,19 @@ const Layout = ({children}:PropsTypes) => {
                 </div>
             <div className="flex  gap-4">
                 <Link to="/login">
-                <span className={`${("/login"===pathName)?'text-pink-500 flex gap-1':' flex gap-1 hover:text-pink-500'}`}>Login<img src={login}/></span>
+                <span className={`${("/login"===pathName)?'text-pink-500 flex gap-1':' flex gap-1 hover:text-pink-500'}`}>Login<img className="w-5" src={login}/></span>
                  </Link>
                  <Link to="/wishlist">
-                <span className={`${("/wishlist"===pathName)?'text-pink-500 flex gap-1':' flex gap-1 hover:text-pink-500'}`}>Wishlist<img src={heart}/></span>
+                <span className={`${("/wishlist"===pathName)?'text-pink-500 flex gap-1':' flex gap-1 hover:text-pink-500'}`}>Wishlist<img  className="w-5" src={heart}/></span>
                 </Link>
-                <span>
-                <Link to="/cart"><img className="w-6" src={("/cart"===pathName)?pinkcart:cart}/></Link></span>
+                <span className="relative ">
+                <Link to="/cart">
+                    <img className="w-6" src={("/cart"===pathName)?pinkcart:cart}/>
+                </Link>
+                <div className="absolute flex items-center justify-center -right-3  -top-3 w-5 h-5 rounded-full bg-white   text-2xl text-pink-500 ">
+                   <div> {data?.length}</div>
+                    </div>
+                    </span>
             </div>
          </div>     
             <div className="flex gap-96 py-2 justify-center">         
