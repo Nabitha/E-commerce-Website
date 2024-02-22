@@ -18,6 +18,9 @@ function checktoken() {
   const token = localStorage.getItem("token");
   return token !== null;
 }
+function removeToken() {
+  localStorage.removeItem("token");
+}
 
 const Layout = ({ children }: PropsTypes) => {
   const location = useLocation();
@@ -88,7 +91,13 @@ const Layout = ({ children }: PropsTypes) => {
             </Link>
           </span>
           {checktoken() ? (
-            <Button label="Log Out" onClick={() => navigate("/products")} />
+            <Button
+              label="Log Out"
+              onClick={() => {
+                navigate("/products");
+                removeToken();
+              }}
+            />
           ) : (
             ""
           )}

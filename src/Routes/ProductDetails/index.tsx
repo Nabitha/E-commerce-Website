@@ -6,15 +6,17 @@ import favorite from "../../Asset/favoriteIcon.svg";
 import favoriteRedIcon from "../../Asset/favoriteRedIcon.svg";
 import Related from "../../Asset/related.svg";
 import cartIcon from "../../Asset/cartIcon.svg";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useFetch from "../../Hooks/useFetch";
 import { AboutProduct, Addcart, Addwishlist } from "../../Services";
 
 const ProductDetails = () => {
   const params = useParams();
   const { data, error, loading } = useFetch<any>(AboutProduct(params.id || ""));
-  console.log("hjkh", data?._id);
+  console.log("hjkh", data);
   const [fav, setFav] = useState(true);
+  const [cartState, setCartState] = useState(true);
+  const navigate = useNavigate();
   if (error) return <div>error 404</div>;
   if (loading)
     return <div className="bg-blue-500 text-red-500">Loading . . . </div>;
@@ -41,25 +43,40 @@ const ProductDetails = () => {
           <div>{data?.color}</div>
           <div>{data?.description}</div>
           <div id="buttons" className="flex gap-4 font-semibold">
-            <div
-              id="Add-to-wishlist"
-              className="flex p-2 gap-5 justify-center shadow-md hover:cursor-pointer w-fit bg-cyan-200 rounded-sm"
-              onClick={() => Addcart(data?._id)}
-            >
-              Add to Cart
-              <img src={cartIcon} alt="" />
-            </div>
+            {cartState ? (
+              <div
+                id="Add-to-wishlist"
+                className="flex p-2 gap-5 justify-center shadow-md hover:cursor-pointer w-fit rounded-sm"
+                onClick={() => {
+                  Addcart(data?._id);
+                  setCartState(!cartState);
+                }}
+              >
+                Add to Cart
+                <img src={cartIcon} alt="" />
+              </div>
+            ) : (
+              <div
+                id="Add-to-wishlist"
+                className="flex p-2 gap-5 justify-center shadow-md hover:cursor-pointer w-fit bg-cyan-200 rounded-sm"
+                onClick={() => {
+                  navigate(`/cart`);
+                }}
+              >
+                go to Cart
+                <img src={cartIcon} alt="" />
+              </div>
+            )}
             <div
               id="Add-to-wishlist"
               className="flex p-2 gap-5 justify-center shadow-md hover:cursor-pointer w-fit rounded-sm"
-              onClick={() => Addwishlist(data?._id)}
+              onClick={() => {
+                Addwishlist(data?._id);
+                setFav(!fav);
+              }}
             >
               Add to Wishlist
-              <img
-                onClick={() => setFav(!fav)}
-                src={fav ? favorite : favoriteRedIcon}
-                className=""
-              />
+              <img src={fav ? favorite : favoriteRedIcon} className="" />
             </div>
           </div>
         </div>
