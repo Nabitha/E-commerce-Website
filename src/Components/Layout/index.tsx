@@ -26,6 +26,9 @@ const Layout = ({ children }: PropsTypes) => {
   useEffect(() => {
     setPathName(location.pathname);
   }, [location.pathname]);
+  const {data}=useFetch<any>(getUser)
+  console.log(data);
+  
 
   return (
     <>
@@ -52,9 +55,9 @@ const Layout = ({ children }: PropsTypes) => {
           {/* <button className="p-1 rounded right-0 absolute"><img className="w-6" src={search} />
                 </button> */}
         </div>
-        <div className="flex gap-4 items-center">
+        <div className="flex gap-12 items-center">
           {checktoken() ? (
-            <div>User</div>
+            <div className="flex hover:text-pink-500">{data?.name}  <img src={login} /></div>
           ) : (
             <Link to="/login">
               <span
