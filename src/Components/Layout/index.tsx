@@ -6,8 +6,10 @@ import search from "../../Assets/images/uil_search.svg";
 import fb from "../../Assets/images/fb.svg";
 import x from "../../Assets/images/X.svg";
 import instagram from "../../Assets/images/insta.svg";
-import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import useFetch from "../../Hooks/useFetch";
+import { getUser } from "../../Services";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Button from "../Button";
 interface PropsTypes {
   children?: React.ReactNode;
@@ -46,16 +48,11 @@ const Layout = ({ children }: PropsTypes) => {
           </span>
         </div>
         <div className="relative w-full max-w-80 max-lg:max-w-36 ">
-          <input
-            type="text"
-            placeholder="Search. . ."
-            className="border-2 rounded border-blueGray-200 text-black px-2 pr-10 w-full"
-          />
-          <button className="p-1 rounded right-0 absolute">
-            <img className="w-6" src={search} />
-          </button>
+          {/* <input type="text" placeholder="Search. . ." className="border-2 rounded border-blueGray-200 text-black px-2 pr-10 w-full"/>  */}
+          {/* <button className="p-1 rounded right-0 absolute"><img className="w-6" src={search} />
+                </button> */}
         </div>
-        <div className="flex gap-4">
+        <div className="flex gap-4 items-center">
           {checktoken() ? (
             <div>User</div>
           ) : (
@@ -85,7 +82,7 @@ const Layout = ({ children }: PropsTypes) => {
             </span>
           </Link>
 
-          <span className="w-16">
+          <span className="w-16 ">
             <Link to="/cart">
               <img src={cart} />
             </Link>
@@ -97,50 +94,6 @@ const Layout = ({ children }: PropsTypes) => {
           )}
         </div>
       </div>
-      <div className="flex gap-96 py-2 justify-center"></div>
-      <div className="p-8">{children}</div>
-      <div className="relative w-full max-w-80 max-lg:max-w-36 ">
-        <input
-          type="text"
-          placeholder="Search. . ."
-          className="border-2 rounded border-blueGray-200 text-black px-2 pr-10 w-full"
-        />
-        <button className="p-1 rounded right-0 absolute">
-          <img className="w-6" src={search} />
-        </button>
-      </div>
-      <div className="flex  gap-4">
-        <Link to="/login">
-          <span
-            className={`${
-              "/login" === pathName
-                ? "text-pink-500 flex gap-1"
-                : " flex gap-1 hover:text-pink-500"
-            }`}
-          >
-            Login
-            <img src={login} />
-          </span>
-        </Link>
-        <Link to="/wishlist">
-          <span
-            className={`${
-              "/wishlist" === pathName
-                ? "text-pink-500 flex gap-1"
-                : " flex gap-1 hover:text-pink-500"
-            }`}
-          >
-            Wishlist
-            <img src={heart} />
-          </span>
-        </Link>
-        <span>
-          <Link to="/cart">
-            <img src={cart} />
-          </Link>
-        </span>
-      </div>
-
       <div className="flex gap-96 py-2 justify-center"></div>
       <div className="p-8">{children}</div>
       <div className="pt-5">
