@@ -14,7 +14,6 @@ import { AboutProduct } from "../../Services";
 const ProductDetails = () => {
   const params = useParams();
   const { data,error,loading } = useFetch<any>(AboutProduct(params.id || ""));
-  console.log("hjkh",data)
   const [fav, setFav] = useState(true);
   if(error)return(<div>error 404</div>)
   if(loading)return(<div className="bg-blue-500 text-red-500">Loading . . . </div>)

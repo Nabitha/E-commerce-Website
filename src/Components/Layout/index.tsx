@@ -5,6 +5,7 @@ import logo from "../../Assets/images/Hekto.svg"
 import search from "../../Assets/images/uil_search.svg"
 import fb from "../../Assets/images/fb.svg"
 import x from "../../Assets/images/X.svg"
+import pinkcart from "../../Assets/images/pinkcart.svg"
 import instagram from "../../Assets/images/insta.svg"
 import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react"
@@ -40,7 +41,7 @@ const Layout = ({children}:PropsTypes) => {
                 <span className={`${("/wishlist"===pathName)?'text-pink-500 flex gap-1':' flex gap-1 hover:text-pink-500'}`}>Wishlist<img src={heart}/></span>
                 </Link>
                 <span>
-                <Link to="/cart"><img src={cart}/></Link></span>
+                <Link to="/cart"><img className="w-6" src={("/cart"===pathName)?pinkcart:cart}/></Link></span>
             </div>
          </div>     
             <div className="flex gap-96 py-2 justify-center">         

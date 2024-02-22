@@ -1,7 +1,4 @@
 import color from "../../Assets/images/color.svg"
-import bluecart from "../../Assets/images/blue_cart.svg"
-import blueheart from "../../Assets/images/blue-heat.svg"
-import bluepluse from "../../Assets/images/blue-pluse.svg"
 import Product from "../../Components/Product"
 import { productlist } from '../../Services';
 import { useState } from "react"
@@ -13,14 +10,15 @@ const { data } = useFetch<{
         productName:string,
         price:number
         _id:any
+        inWishlist:boolean
+        inCart:boolean
 }[]>(
     productlist )
 const Zooming = () => {
     setIsZoom((prev) => !prev);
   };
     return(<>
-<div>
-    
+<div>   
     <div className="flex gap-36 justify-center p-4">
         <div>
             <div className="text-indigo-900 font-medium text-lg">Ecommerce Acceories & Fashion item </div><div className="text-gray-400 font-normal text-sm         ">About 9,620 results (0.62 seconds)</div>
@@ -38,11 +36,13 @@ const Zooming = () => {
         </div>
     </div>
     <div className="grid grid-cols-4 gap-2 space-y-5 place-items-center">
+        
         {data?.map((product,index)=>(
             <Product key={index} image={product?.image} names={product?.productName} price={product.price} 
-             color={color} id={product._id}/>  
+            color={color} id={product._id} wishstatus={product.inWishlist} cartstatus={product.inCart} />  
             ))}     
     </div>
 </div>
+            {console.log("uu",data)};
 </>)}
 export default Productlist
