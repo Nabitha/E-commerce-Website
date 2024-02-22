@@ -14,3 +14,5 @@ export const forgotPassword = (data: object) =>
   postCall(`/auth/forgot-password-sendOtp`, data);
 export const otpVerification = (email: string, otp: string) =>
   postCall(`/auth/verify-otp`, { email, otp });
+export const PasswordReset = (data: object) =>
+  postCall(`/auth/reset-password`, data);
