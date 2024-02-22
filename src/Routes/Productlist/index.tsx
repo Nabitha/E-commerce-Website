@@ -1,7 +1,4 @@
 import color from "../../Assets/images/color.svg";
-import bluecart from "../../Assets/images/blue_cart.svg";
-import blueheart from "../../Assets/images/blue-heat.svg";
-import bluepluse from "../../Assets/images/blue-pluse.svg";
 import Product from "../../Components/Product";
 import { productlist } from "../../Services";
 import { useState } from "react";
@@ -14,10 +11,10 @@ const Productlist = () => {
       productName: string;
       price: number;
       _id: any;
+      inWishlist: boolean;
+      inCart: boolean;
     }[]
   >(productlist);
-  const { data: test } = useFetch(productlist);
-  console.log(test);
   const Zooming = () => {
     setIsZoom((prev) => !prev);
   };
@@ -39,6 +36,10 @@ const Productlist = () => {
               <input type="number" className="w-16 border border-gray-300" />{" "}
             </div>
             <div>
+              Per Page:{" "}
+              <input type="number" className="w-16 border border-gray-300" />{" "}
+            </div>
+            <div>
               <label>Sort By:</label>
               <select className="border border-gray-300 mx-2">
                 <option value="BestMarch">BestMarch</option>
@@ -49,19 +50,22 @@ const Productlist = () => {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-4 gap-2 space-y-5 place-items-center">
-          {data?.map((product, index) => (
-            <Product
-              key={index}
-              image={product?.image}
-              names={product?.productName}
-              price={product.price}
-              color={color}
-              id={product._id}
-            />
-          ))}
-        </div>
       </div>
+      <div className="grid grid-cols-4 gap-2 space-y-5 place-items-center">
+        {data?.map((product, index) => (
+          <Product
+            key={index}
+            image={product?.image}
+            names={product?.productName}
+            price={product.price}
+            color={color}
+            id={product._id}
+            wishstatus={product.inWishlist}
+            cartstatus={product.inCart}
+          />
+        ))}
+      </div>
+      {console.log("uu", data)};
     </>
   );
 };

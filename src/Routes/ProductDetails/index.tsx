@@ -13,7 +13,6 @@ import { AboutProduct, Addcart, Addwishlist } from "../../Services";
 const ProductDetails = () => {
   const params = useParams();
   const { data, error, loading } = useFetch<any>(AboutProduct(params.id || ""));
-  console.log("hjkh", data);
   const [fav, setFav] = useState(true);
   const [cartState, setCartState] = useState(true);
   const navigate = useNavigate();
