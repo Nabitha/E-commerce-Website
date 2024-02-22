@@ -6,20 +6,25 @@ import search from "../../Assets/images/uil_search.svg";
 import fb from "../../Assets/images/fb.svg";
 import x from "../../Assets/images/X.svg";
 import instagram from "../../Assets/images/insta.svg";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import useFetch from "../../Hooks/useFetch";
-import { getUser } from "../../Services";
+import Button from "../Button";
 interface PropsTypes {
   children?: React.ReactNode;
 }
+function checktoken() {
+  const token = localStorage.getItem("token");
+  return token !== null;
+}
+
 const Layout = ({ children }: PropsTypes) => {
-  const { data } = useFetch(getUser);
   const location = useLocation();
   const [pathName, setPathName] = useState("");
+  const navigate = useNavigate();
   useEffect(() => {
     setPathName(location.pathname);
   }, [location.pathname]);
+
   return (
     <>
       <div className="bg-violet-600 text-white font-semibold flex items-center justify-around  py-4 pr-10">
@@ -50,19 +55,23 @@ const Layout = ({ children }: PropsTypes) => {
             <img className="w-6" src={search} />
           </button>
         </div>
-        <div className="flex  gap-4">
-          <Link to="/login">
-            <span
-              className={`${
-                "/login" === pathName
-                  ? "text-pink-500 flex gap-1"
-                  : " flex gap-1 hover:text-pink-500"
-              }`}
-            >
-              Login
-              <img src={login} />
-            </span>
-          </Link>
+        <div className="flex gap-4">
+          {checktoken() ? (
+            <div>User</div>
+          ) : (
+            <Link to="/login">
+              <span
+                className={`${
+                  "/login" === pathName
+                    ? "text-pink-500 flex gap-1"
+                    : " flex gap-1 hover:text-pink-500"
+                }`}
+              >
+                Login
+                <img src={login} />
+              </span>
+            </Link>
+          )}
           <Link to="/wishlist">
             <span
               className={`${
@@ -75,13 +84,63 @@ const Layout = ({ children }: PropsTypes) => {
               <img src={heart} />
             </span>
           </Link>
-          <span>
+
+          <span className="w-16">
             <Link to="/cart">
               <img src={cart} />
             </Link>
           </span>
+          {checktoken() ? (
+            <Button label="Log Out" onClick={() => navigate("/products")} />
+          ) : (
+            ""
+          )}
         </div>
       </div>
+      <div className="flex gap-96 py-2 justify-center"></div>
+      <div className="p-8">{children}</div>
+      <div className="relative w-full max-w-80 max-lg:max-w-36 ">
+        <input
+          type="text"
+          placeholder="Search. . ."
+          className="border-2 rounded border-blueGray-200 text-black px-2 pr-10 w-full"
+        />
+        <button className="p-1 rounded right-0 absolute">
+          <img className="w-6" src={search} />
+        </button>
+      </div>
+      <div className="flex  gap-4">
+        <Link to="/login">
+          <span
+            className={`${
+              "/login" === pathName
+                ? "text-pink-500 flex gap-1"
+                : " flex gap-1 hover:text-pink-500"
+            }`}
+          >
+            Login
+            <img src={login} />
+          </span>
+        </Link>
+        <Link to="/wishlist">
+          <span
+            className={`${
+              "/wishlist" === pathName
+                ? "text-pink-500 flex gap-1"
+                : " flex gap-1 hover:text-pink-500"
+            }`}
+          >
+            Wishlist
+            <img src={heart} />
+          </span>
+        </Link>
+        <span>
+          <Link to="/cart">
+            <img src={cart} />
+          </Link>
+        </span>
+      </div>
+
       <div className="flex gap-96 py-2 justify-center"></div>
       <div className="p-8">{children}</div>
       <div className="pt-5">
