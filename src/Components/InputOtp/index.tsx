@@ -23,11 +23,12 @@ export const InputOtp = ({ length = 5, onChange, value = '' }: Props) => {
             
             }
             onChange(newOtpDigits.join(''), e);
+            
     }
 };
 
   return (
-    <div>
+    <div className='flex gap-4  '>
    {otpDigits.map((digit,index)=>
              <input 
              key={index}
@@ -37,7 +38,7 @@ export const InputOtp = ({ length = 5, onChange, value = '' }: Props) => {
              maxLength={1}
              onChange={handleOtpDigitChange(index)}
 
-             className='border-4  w-12 h-12  text-center'
+             className='border-2 w-12 h-12 text-center'
 
             
            />

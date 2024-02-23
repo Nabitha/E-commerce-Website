@@ -12,13 +12,7 @@ export const Login = () => {
   const onSubmit = async (data: object) => {
     const res = await loginCall(data);
     if (!res.status) {
-      res.data.forEach(
-        ({ path, message }: { path: string; message: string }) => {
-          if (path === "all") {
-            setError(message);
-          }
-        }
-      );
+  setError(res.message)
       return false;
     }
     localStorage.setItem("token", res.data.token);

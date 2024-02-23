@@ -34,7 +34,7 @@ export const ForgotPassword = () => {
 
   }
  return (
-    <HomePageScreen title='Forgot Password' link='/login' linkLabel='Back'>
+    <HomePageScreen  title='Forgot Password' link='/login' linkLabel='Back'>
         <Form formStructure = {[
             {
                 field: "email",

@@ -31,6 +31,8 @@ export const OtpVerification = () => {
       );
       return false;
     }
+    localStorage.setItem('token', res.data.token);
+
       navigate('/ResetPassword')
      
       return true;
@@ -39,7 +41,9 @@ export const OtpVerification = () => {
    
 
   return (
-    <HomePageScreen title='Forgot Password' link='/login' linkLabel='Back'>
+    <div className=''>
+    
+    <HomePageScreen title='OTP Verification' link='/login' linkLabel='Back'>
 
     <Form 
     
@@ -62,7 +66,7 @@ export const OtpVerification = () => {
    </HomePageScreen>
       
         
-      
+   </div>  
     
   
       
