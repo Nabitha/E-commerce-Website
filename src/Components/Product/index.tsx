@@ -19,6 +19,10 @@ interface PropsTypes {
   cartstatus: boolean;
   reload?:()=>void
 }
+export function checktoken() {
+  const token = localStorage.getItem("token");
+  return token !== null;
+}
 const Product = ({
   image,
   names,
@@ -44,7 +48,7 @@ const Product = ({
     >
       <div className="group relative bg-gray-100 grid place-items-center hover:bg-gray-300 h-60 w-60 ">
         <div className="absolute left-4 bottom-3 grid gap-2 hidden group-hover:grid ">
-          <Hoveritem
+          {checktoken()&&<Hoveritem
             icon={isOnCart ? fullbluecart : bluecart}
             onClick={async () => {
               if (isOnCart) {
@@ -57,7 +61,8 @@ const Product = ({
               reloadHeader()
               setIsOnCart(true);
             }}
-          />
+          />}
+          {checktoken()&&
           <Hoveritem
             icon={
               location.pathname === "/wishlist"
@@ -71,7 +76,7 @@ const Product = ({
               await Addwishlist(id);
               reload?.()
             }}
-          />
+          />}
           <Hoveritem
             icon={bluepluse}
             onClick={() => {

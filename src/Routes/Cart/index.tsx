@@ -28,6 +28,7 @@ const Cart = () => {
     const res = await cartclear();
     if (res.status) {
       reload();
+      reloadHeader()
     }
   };
   const {
@@ -53,20 +54,20 @@ const Cart = () => {
   return (
     
     <div className="flex justify-center">
+      {data?.length===0 ?<div className='font-medium text-4xl h-56'>Your Cart is Empty!</div>:
       <div className="grid ">
-      {data?.length===0 || !data ?"":
-        <div className="grid grid-cols-5 place-items-center text-indigo-900 font-medium pb-5">
+      
+        {data&&<div className="grid grid-cols-5 place-items-center text-indigo-900 font-medium pb-5">
           <span>Product</span>
           <span>Price</span>
           <span>Quantity</span>
           <span>Total</span>
         </div>}
+        
         <div className="grid grid-cols-5 place-items-center gap-2 border-b border-gray-200  ">
-        {loading && <div  className=" text-center text-pink-500 text-2xl w-80 flex ml-20 "><img className="w-12 animate-spin" src={buffer}/> Loading...!</div>}
+        {loading && <div className="w-80 flex ml-20  absolute"><img className="w-12 animate-spin" src={buffer}/> </div>}
         {!!error && error.message}
-          {data?.length===0 &&
-                    <div className='font-medium text-4xl absolute '>Your Cart is Empty!</div>
-                  }
+
     
           {data?.map((Cart) => (
             <Fragment key={Cart._id}>
@@ -103,7 +104,7 @@ const Cart = () => {
             onClick={onClearCart}
           ></Button>
         </div>}
-      </div>
+      </div>}
       { (data?.length === 0 || !data) ?"":
       <div>
         <div className="text-center  text-indigo-900 font-medium pb-5">

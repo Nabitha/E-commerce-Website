@@ -22,14 +22,14 @@ const Wishlist = () =>{
     }
     return(<>
 <div className="grid">
-    {data?.length ===0  || !data?"":
+    {data?.length ===0 ? <div className='font-medium text-4xl text-center h-56'>Your Wishlist is Empty!</div>:
     <div className="place-self-end w-52 ">
-    <Button label="Clear wishlist" type="Primary" onClick={onWishlist} ></Button>
+    {data&&<Button label="Clear wishlist" type="Primary" onClick={onWishlist} ></Button>}
 </div>}
     <div className="grid grid-cols-4 gap-2 space-y-5 place-items-center">
-        {loading && <div  className=" text-center text-pink-500 flex text-2xl w-80"><img className="w-12 animate-spin" src={buffer}/>Loading...!</div>}
+        {loading && <div  className="absolute  w-80"><img className="w-12 animate-spin ml-50" src={buffer}/></div>}
         {!!error && error.message}
-        {data?.length===0 && <div className='font-medium text-4xl absolute '>Your Wishlist is Empty!</div>}
+        
         {data?.map((product,index)=>(
             <Product key={index} image={product.image} names={product.productName} price={product.price} 
             id={product._id} reload={reload} cartstatus={product.inCart}/>  

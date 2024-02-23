@@ -120,7 +120,7 @@ const Layout = ({ children }: PropsTypes) => {
       <div className="flex gap-96 py-2 justify-center"></div>
       <div className="p-8">{children}</div>
       <div className="pt-5">
-        <div className="flex justify-center justify-around gap-12 bg-indigo-50 py-8 text-indigo-400">
+        <div className=" flex justify-center justify-around gap-12 bg-indigo-50 py-8 text-indigo-400">
           <div className="flex flex-col gap-2">
             <div className="text-2xl text-black font-medium">Catagories</div>
             <div>Laptops & Computers</div>
