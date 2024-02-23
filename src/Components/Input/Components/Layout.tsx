@@ -5,9 +5,9 @@ type PropsTypes = {
     isBlurred: boolean;
 };
 
-const Layout = ({error,type,children,isBlurred}:PropsTypes) => {
-  return (
-    <div
+const Layout = ({ error, type, children, isBlurred }: PropsTypes) => {
+    return (
+        <div
             className={`input-field-container ${
                 error && isBlurred ? "input-field-container-error" : ""
             }`}
@@ -21,7 +21,7 @@ const Layout = ({error,type,children,isBlurred}:PropsTypes) => {
             </div>
             <div className="error-text">{error && isBlurred && error}</div>
         </div>
-  )
-}
+    );
+};
 
-export default Layout
+export default Layout;
