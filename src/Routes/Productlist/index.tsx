@@ -1,10 +1,8 @@
 import color from "../../Assets/images/color.svg"
 import Product from "../../Components/Product"
 import { productlist } from '../../Services';
-import { useState } from "react"
 import useFetch from "../../Hooks/useFetch"
 const Productlist = () =>{
-const [iszoom, setIsZoom] = useState(false);
 const { data } = useFetch<{
         image: string,
         productName:string,
@@ -14,9 +12,6 @@ const { data } = useFetch<{
         inCart:boolean
 }[]>(
     productlist )
-const Zooming = () => {
-    setIsZoom((prev) => !prev);
-  };
     return(<>
 <div>   
     <div className="flex gap-36 justify-center p-4">

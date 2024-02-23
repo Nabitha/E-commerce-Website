@@ -63,10 +63,11 @@ const Layout = ({children}:PropsTypes) => {
                 <span className="relative ">
                 <Link to="/cart">
                     <img className="w-6" src={("/cart"===pathName)?pinkcart:cart}/>
-                </Link>
-                <div className="absolute flex items-center justify-center -right-3  -top-3 w-5 h-5 rounded-full bg-white   text-2xl text-pink-500 ">
-                   <div> {data?.length}</div>
+                
+                <div className="absolute flex items-center justify-center -right-3  -top-3 w-5 h-5 rounded-full bg-white   text-md text-pink-500 ">
+                   <div> {data?.length ||0}</div>
                     </div>
+                    </Link>
                     </span>
             </div>
          </div>     
