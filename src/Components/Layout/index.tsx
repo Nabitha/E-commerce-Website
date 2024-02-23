@@ -85,7 +85,7 @@ const Layout = ({ children }: PropsTypes) => {
                  </span>
             
           
-          <Link to="/wishlist">
+                 {checktoken() ? <Link to="/wishlist">
             <span
               className={`${
                 "/wishlist" === pathName
@@ -96,9 +96,9 @@ const Layout = ({ children }: PropsTypes) => {
               Wishlist
               <img className="w-5" src={heart} />
             </span>
-          </Link>
+          </Link>:""}
           <span className="relative ">
-            <Link to="/cart">
+          {checktoken() ? <Link to="/cart">
               <img
                 className="w-6"
                 src={"/cart" === pathName ? pinkcart : cart}
@@ -106,7 +106,7 @@ const Layout = ({ children }: PropsTypes) => {
             <div className="absolute flex items-center justify-center -right-3  -top-3 w-5 h-5 rounded-full bg-white   text-md text-pink-500 ">
               <div> {data?.length ||0}</div>
             </div>
-            </Link>
+            </Link>:""}
 
           </span>
           <span>
@@ -129,63 +129,6 @@ const Layout = ({ children }: PropsTypes) => {
         <div className="p-8">
         {children}
         </div>
-        {/* <div className="flex  gap-4">
-          {checktoken() ? (
-            <div className="flex hover:text-pink-500">
-              {user?.name} <img src={login} />
-            </div>
-          ) : (
-            <Link to="/login">
-              <span
-                className={`${
-                  "/login" === pathName
-                    ? "text-pink-500 flex gap-1"
-                    : " flex gap-1 hover:text-pink-500"
-                }`}
-              >
-                Login
-                <img src={login} />
-              </span>
-            </Link>
-          )}
-          <Link to="/wishlist">
-            <span
-              className={`${
-                "/wishlist" === pathName
-                  ? "text-pink-500 flex gap-1"
-                  : " flex gap-1 hover:text-pink-500"
-              }`}
-            >
-              Wishlist
-              <img className="w-5" src={heart} />
-            </span>
-          </Link>
-          <span className="relative ">
-            <Link to="/cart">
-              <img
-                className="w-6"
-                src={"/cart" === pathName ? pinkcart : cart}
-              />
-            <div className="absolute flex items-center justify-center -right-3  -top-3 w-5 h-5 rounded-full bg-white   text-md text-pink-500 ">
-              <div> {data?.length ||0}</div>
-            </div>
-            </Link>
-
-          </span>
-          <span>
-            {checktoken() ? (
-              <Button
-                label="Log Out"
-                onClick={() => {
-                  navigate("/products");
-                  removeToken();
-                }}
-              />
-            ) : (
-              ""
-            )}
-          </span>
-      </div> */}
       <div className="pt-5">
         <div className="flex justify-center justify-around gap-12 bg-indigo-50 py-8 text-indigo-400">
           <div className="flex flex-col gap-2">
