@@ -14,4 +14,4 @@ const Label = ({label}:PropsTypes) => {
   )
 }
 
-export default Label
+export default Label;
