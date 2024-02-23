@@ -6,9 +6,10 @@ import favorite from "../../Asset/favoriteIcon.svg";
 import favoriteRedIcon from "../../Asset/favoriteRedIcon.svg";
 import Related from "../../Asset/related.svg";
 import cartIcon from "../../Asset/cartIcon.svg";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import useFetch from "../../Hooks/useFetch";
 import { AboutProduct, Addcart, Addwishlist } from "../../Services";
+import { checktoken } from "../../Components/Layout";
 
 const ProductDetails = () => {
   const params = useParams();
@@ -16,6 +17,7 @@ const ProductDetails = () => {
   const [fav, setFav] = useState(true);
   const [cartState, setCartState] = useState(true);
   const navigate = useNavigate();
+
   if (error) return <div>error 404</div>;
   if (loading)
     return <div className="bg-blue-500 text-red-500">Loading . . . </div>;
@@ -47,8 +49,10 @@ const ProductDetails = () => {
                 id="Add-to-wishlist"
                 className="flex p-2 gap-5 justify-center shadow-md hover:cursor-pointer w-fit rounded-sm"
                 onClick={() => {
-                  Addcart(data?._id);
-                  setCartState(!cartState);
+                  if (checktoken()) {
+                    Addcart(data?._id);
+                    setCartState(!cartState);
+                  } else navigate("/login");
                 }}
               >
                 Add to Cart
@@ -70,8 +74,10 @@ const ProductDetails = () => {
               id="Add-to-wishlist"
               className="flex p-2 gap-5 justify-center shadow-md hover:cursor-pointer w-fit rounded-sm"
               onClick={() => {
-                Addwishlist(data?._id);
-                setFav(!fav);
+                if (checktoken()) {
+                  Addwishlist(data?._id);
+                  setFav(!fav);
+                } else navigate("/login");
               }}
             >
               Add to Wishlist
