@@ -22,7 +22,7 @@ export const Login = () => {
       return false;
     }
     localStorage.setItem("token", res.data.token);
-    navigate("/login");
+    navigate(-1);
 
     return true;
   };
