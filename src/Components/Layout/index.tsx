@@ -16,7 +16,7 @@ import { cartdisplay } from "../../Services";
 interface PropsTypes {
   children?: React.ReactNode;
 }
-function checktoken() {
+export function checktoken() {
   const token = localStorage.getItem("token");
   return token !== null;
 }
