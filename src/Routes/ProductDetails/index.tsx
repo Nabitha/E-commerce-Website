@@ -4,18 +4,31 @@ import SubProfile2 from "../../Asset/SubProfile2.svg";
 import SubProfile3 from "../../Asset/SubProfile3.svg";
 import favorite from "../../Asset/favoriteIcon.svg";
 import favoriteRedIcon from "../../Asset/favoriteRedIcon.svg";
-import Related from "../../Asset/related.svg";
 import cartIcon from "../../Asset/cartIcon.svg";
+import blueCartIcon from "../../Asset/blueCartIcon.svg";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import useFetch from "../../Hooks/useFetch";
-import { AboutProduct, Addcart, Addwishlist } from "../../Services";
+import {
+  AboutProduct,
+  Addcart,
+  removecartItem,
+  Addwishlist,
+  relatedProducts,
+} from "../../Services";
 import { checktoken } from "../../Components/Layout";
 
 const ProductDetails = () => {
   const params = useParams();
-  const { data, error, loading } = useFetch<any>(AboutProduct(params.id || ""));
-  const [fav, setFav] = useState(true);
-  const [cartState, setCartState] = useState(true);
+  const {
+    data: details,
+    error,
+    loading,
+    reload,
+  } = useFetch<any>(AboutProduct(params.id || ""));
+  console.log("1", details);
+  const { data: related } = useFetch<any>(
+    relatedProducts(details?.categoryName)
+  );
   const navigate = useNavigate();
 
   if (error) return <div>error 404</div>;
@@ -34,54 +47,53 @@ const ProductDetails = () => {
             <img src={SubProfile3} alt="" />
           </div>
           <div>
-            <img className="w-full" src={data?.image} alt="" />
+            <img className="w-full" src={details?.image} alt="" />
           </div>
         </div>
         <div id="details" className="flex flex-col gap-2 m-4">
-          <div className="text-4xl font-bold">{data?.productName}</div>
-          <div>{data?.price}</div>
-          <div>{data?.quantity}</div>
-          <div>{data?.color}</div>
-          <div>{data?.description}</div>
+          <div className="text-4xl font-bold">{details?.productName}</div>
+          <div>{details?.price}</div>
+          <div>{details?.quantity}</div>
+          <div>{details?.color}</div>
+          <div>{details?.description}</div>
           <div id="buttons" className="flex gap-4 font-semibold">
-            {cartState ? (
+            {details?.inCart ? (
               <div
-                id="Add-to-wishlist"
-                className="flex p-2 gap-5 justify-center shadow-md hover:cursor-pointer w-fit rounded-sm"
-                onClick={() => {
-                  if (checktoken()) {
-                    Addcart(data?._id);
-                    setCartState(!cartState);
-                  } else navigate("/login");
-                }}
-              >
-                Add to Cart
-                <img src={cartIcon} alt="" />
-              </div>
-            ) : (
-              <div
-                id="Add-to-wishlist"
+                id="go to cart"
                 className="flex p-2 gap-5 justify-center shadow-md hover:cursor-pointer w-fit bg-cyan-200 rounded-sm"
                 onClick={() => {
                   navigate(`/cart`);
                 }}
               >
                 go to Cart
+                <img src={blueCartIcon} alt="" />
+              </div>
+            ) : (
+              <div
+                id="Add-to-cart"
+                className="flex p-2 gap-5 justify-center shadow-md hover:cursor-pointer w-fit rounded-sm"
+                onClick={async () => {
+                  if (checktoken()) {
+                    await Addcart(details?._id);
+                  } else navigate("/login");
+                }}
+              >
+                Add to Cart
                 <img src={cartIcon} alt="" />
               </div>
             )}
             <div
               id="Add-to-wishlist"
               className="flex p-2 gap-5 justify-center shadow-md hover:cursor-pointer w-fit rounded-sm"
-              onClick={() => {
+              onClick={async () => {
                 if (checktoken()) {
-                  Addwishlist(data?._id);
-                  setFav(!fav);
+                  await Addwishlist(details?._id);
+                  reload();
                 } else navigate("/login");
               }}
             >
               Add to Wishlist
-              <img src={fav ? favorite : favoriteRedIcon} className="" />
+              <img src={favoriteRedIcon} className="" />
             </div>
           </div>
         </div>
@@ -111,10 +123,9 @@ const ProductDetails = () => {
       <div className=" px-20 ">
         <div className="text-xl"> related products</div>
         <div className="grid grid-flow-row gap-10 pt-6 sm:grid-cols-2 lg:grid-cols-4">
-          <img src={Related} alt="" />
-          <img src={Related} alt="" />
-          <img src={Related} alt="" />
-          <img src={Related} alt="" />
+          {related?.map((item: any, index: number) => (
+            <img key={index} src={item.image} alt="" />
+          ))}
         </div>
       </div>
     </div>
