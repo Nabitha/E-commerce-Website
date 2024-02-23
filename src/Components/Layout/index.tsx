@@ -53,61 +53,54 @@ const Layout = ({ children }: PropsTypes) => {
                 <button className="p-1 rounded right-0 absolute"><img className="w-6" src={search} />
                 </button>
                 </div>
-            {/* <div className="flex  gap-4">
-                <Link to="/login">
-                <span className={`${("/login"===pathName)?'text-pink-500 flex gap-1':' flex gap-1 hover:text-pink-500'}`}>Login<img className="w-5" src={login}/></span>
-                 </Link>
-                 <Link to="/wishlist">
-                <span className={`${("/wishlist"===pathName)?'text-pink-500 flex gap-1':' flex gap-1 hover:text-pink-500'}`}>Wishlist<img  className="w-5" src={heart}/></span>
-                </Link>
-                <span className="relative ">
-                <Link to="/cart">
-                    <img className="w-6" src={("/cart"===pathName)?pinkcart:cart}/>
-                
-                <div className="absolute flex items-center justify-center -right-3  -top-3 w-5 h-5 rounded-full bg-white   text-md text-pink-500 ">
-                   <div> {data?.length ||0}</div>
-                    </div>
-                    </Link>
-                    </span>
-            </div> */}
-                   <div className="flex  items-center gap-8">
-         
-            
+        <div className="flex  items-center gap-8">
+          <span
+            className={`${
+              "/login" === pathName
+                ? "text-pink-500 flex  gap-1"
+                : " flex gap-1 hover:text-pink-500"
+            }`}
+          >
+            {checktoken() ? (
+              <span>{user?.name} </span>
+            ) : (
+              <Link to="/login"> Login </Link>
+            )}
+            <span>
+              <img src={login} />
+            </span>
+          </span>
+
+          {checktoken() ? (
+            <Link to="/wishlist">
               <span
                 className={`${
-                  "/login" === pathName
-                    ? "text-pink-500 flex  gap-1"
+                  "/wishlist" === pathName
+                    ? "text-pink-500 flex gap-1"
                     : " flex gap-1 hover:text-pink-500"
                 }`}
-              >{checktoken() ? <span>{user?.name} </span>: <Link to="/login"> Login </Link>} 
-              <span><img src={login} /></span>
-                
-                 </span>
-            
-          
-                 {checktoken() ? <Link to="/wishlist">
-            <span
-              className={`${
-                "/wishlist" === pathName
-                  ? "text-pink-500 flex gap-1"
-                  : " flex gap-1 hover:text-pink-500"
-              }`}
-            >
-              Wishlist
-              <img className="w-5" src={heart} />
-            </span>
-          </Link>:""}
+              >
+                Wishlist
+                <img className="w-5" src={heart} />
+              </span>
+            </Link>
+          ) : (
+            ""
+          )}
           <span className="relative ">
-          {checktoken() ? <Link to="/cart">
-              <img
-                className="w-6"
-                src={"/cart" === pathName ? pinkcart : cart}
-              />
-            <div className="absolute flex items-center justify-center -right-3  -top-3 w-5 h-5 rounded-full bg-white   text-md text-pink-500 ">
-              <div> {data?.length ||0}</div>
-            </div>
-            </Link>:""}
-
+            {checktoken() ? (
+              <Link to="/cart">
+                <img
+                  className="w-6"
+                  src={"/cart" === pathName ? pinkcart : cart}
+                />
+                <div className="absolute flex items-center justify-center -right-3  -top-3 w-5 h-5 rounded-full bg-white   text-md text-pink-500 ">
+                  <div> {data?.length || 0}</div>
+                </div>
+              </Link>
+            ) : (
+              ""
+            )}
           </span>
           <span>
             {checktoken() ? (
@@ -122,13 +115,10 @@ const Layout = ({ children }: PropsTypes) => {
               ""
             )}
           </span>
-      </div>
-         </div>     
-            <div className="flex gap-96 py-2 justify-center">         
-            </div>
-        <div className="p-8">
-        {children}
         </div>
+      </div>
+      <div className="flex gap-96 py-2 justify-center"></div>
+      <div className="p-8">{children}</div>
       <div className="pt-5">
         <div className="flex justify-center justify-around gap-12 bg-indigo-50 py-8 text-indigo-400">
           <div className="flex flex-col gap-2">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { HomePageScreen } from "../../Components/Screens/HomePageScreen";
 import Form from "../../Components/InfraStructure/Form";
 import { validateRegister, validateResetPassword } from "../../Validation";
@@ -6,12 +6,18 @@ import { useNavigate } from "react-router-dom";
 import { PasswordReset } from "../../Services";
 
 const ResetPassword = () => {
+  const [error, setError] = useState('');
+  
+  
+  
   const navigate = useNavigate();
   const OnSubmit = async (data: any) => {
+    
     console.log("in");
     PasswordReset(data);
-    navigate("/products");
+    navigate("/login");
   };
+  
   return (
     <div>
       <HomePageScreen title="Reset Password">
