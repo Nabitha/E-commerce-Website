@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-type ButtonType = 'Primary' | 'Secondary' | 'Inline';
+type ButtonType = 'Primary' | 'Secondary' | 'Inline' | 'checkout';
 
 interface PropsTypes {
   label: String;
@@ -30,7 +30,8 @@ const Button = ({
   text-white cursor-pointer hover:opacity-90
   transition-all`,
       Secondary:
-          'text-slate-700 p-3  cursor-pointer hover:opacity-90'
+          'text-slate-700 p-3  cursor-pointer hover:opacity-90',
+          checkout: 'bg-green-500 w-full text-white p-1 rounded'
   })[type],
 [type]
 );

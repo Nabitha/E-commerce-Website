@@ -1,4 +1,3 @@
-import color from "../../Assets/images/color.svg"
 import Product from "../../Components/Product"
 import { productlist } from '../../Services';
 import useFetch from "../../Hooks/useFetch"
@@ -24,7 +23,6 @@ const { data } = useFetch<{
             image={product?.image}
             names={product?.productName}
             price={product.price}
-            color={color}
             id={product._id}
             wishstatus={product.inWishlist}
             cartstatus={product.inCart}

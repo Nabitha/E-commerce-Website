@@ -20,10 +20,6 @@ const Wishlist = () =>{
             reload();
         }
     }
-    // useEffect(()=>{
-    //     reload()
-    // },
-    // [data])
     return(<>
 <div className="grid">
     {data?.length ===0  || !data?"":
@@ -33,10 +29,10 @@ const Wishlist = () =>{
     <div className="grid grid-cols-4 gap-2 space-y-5 place-items-center">
         {loading && <div  className=" text-center text-pink-500 flex text-2xl w-80"><img className="w-12 animate-spin" src={buffer}/>Loading...!</div>}
         {!!error && error.message}
-        {data?.length===0 && <div  className=" text-center text-pink-500 text-2xl w-80"> Your Wishlist is Empty</div>}
+        {data?.length===0 && <div className='font-medium text-4xl absolute '>Your Wishlist is Empty!</div>}
         {data?.map((product,index)=>(
             <Product key={index} image={product.image} names={product.productName} price={product.price} 
-            id={product._id} wishstatus={true} cartstatus={product.inCart}/>  
+            id={product._id} reload={reload} cartstatus={product.inCart}/>  
             ))} 
     </div>
 </div>

@@ -5,8 +5,7 @@ export type AppState = {
 }
 
 interface AppData {
-    state: AppState;
-    setState: Dispatch<SetStateAction<AppState>>;
+    reload:()=>void
 }
 
 export default AppData;

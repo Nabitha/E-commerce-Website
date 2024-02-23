@@ -13,6 +13,7 @@ import instagram from "../../Assets/images/insta.svg";
 import { useEffect, useState } from "react";
 import useFetch from "../../Hooks/useFetch";
 import { cartdisplay } from "../../Services";
+import AppContext from "../../Contexts/AppContext";
 interface PropsTypes {
   children?: React.ReactNode;
 }
@@ -27,19 +28,18 @@ function removeToken() {
 const Layout = ({ children }: PropsTypes) => {
   const location = useLocation();
   const [pathName, setPathName] = useState("");
-  const { data, reload } = useFetch<any>(cartdisplay);
+  const { data, reload: reloadCart } = useFetch<any>(cartdisplay);
   const { data: user } = useFetch<any>(getUser);
   useEffect(() => {
     setPathName(location.pathname);
   }, [location.pathname]);
-    useEffect(()=>{
-        reload()
-    },
-    [data])
     
+  const reload = ()=>{
+    reloadCart();
+  }
     const navigate = useNavigate();
     return (
-        <>
+        <AppContext.Provider value={{reload}}>
          <div className="sticky top-0 z-50 bg-violet-600 text-white font-semibold flex items-center justify-around  py-4 pr-10"> 
          <div className="flex items-center gap-16">
                 <span><img src={logo}/></span>
@@ -156,7 +156,7 @@ const Layout = ({ children }: PropsTypes) => {
           </span>
         </div>
       </div>
-    </>
+    </AppContext.Provider>
   );
 };
 export default Layout;
