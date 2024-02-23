@@ -1,83 +1,66 @@
-import React, { useState } from 'react'
-import Form from '../../../Components/InfraStructure/Form';
-import { ValidateLogin, validateRegister } from '../../../Validation';
-import { HomePageScreen } from '../../../Components/Screens/HomePageScreen';
-import { Link, useNavigate } from 'react-router-dom';
-import { loginCall } from '../../../Services';
-
+import React, { useState } from "react";
+import Form from "../../../Components/InfraStructure/Form";
+import { ValidateLogin, validateRegister } from "../../../Validation";
+import { HomePageScreen } from "../../../Components/Screens/HomePageScreen";
+import { Link, useNavigate } from "react-router-dom";
+import { loginCall } from "../../../Services";
 
 export const Login = () => {
-    const [error, setError] = useState('');
-  const navigate=useNavigate();
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const onSubmit= async (data:object)=>{
-    
-    const res=await loginCall(data);
+  const onSubmit = async (data: object) => {
+    const res = await loginCall(data);
     if (!res.status) {
       res.data.forEach(
         ({ path, message }: { path: string; message: string }) => {
           if (path === "all") {
             setError(message);
           }
-        },
+        }
       );
       return false;
     }
-    localStorage.setItem('token', res.data.token);
-    navigate('/products')
-   
+    localStorage.setItem("token", res.data.token);
+    navigate("/login");
+
     return true;
-
-  }
+  };
   return (
-    
-   <HomePageScreen title='Login'>
-
-    
-        <Form formStructure={[
-        {
-          field: "email",
-          label: "Email Address:",
-          placeholder: "Email Address"
-        },
-        {
-          field: "password",
-          label: "Password:",
-          type: "password",
-          placeholder: "Password"
+    <HomePageScreen title="Login">
+      <Form
+        formStructure={[
+          {
+            field: "email",
+            label: "Email Address:",
+            placeholder: "Email Address",
+          },
+          {
+            field: "password",
+            label: "Password:",
+            type: "password",
+            placeholder: "Password",
+          },
+        ]}
+        emptyForm={{
+          email: "",
+          password: "",
+        }}
+        validateFunction={ValidateLogin}
+        onSubmit={onSubmit}
+        formSubmitButtonLabel="Sign In"
+        commonError={error}
+        afterFormSection={
+          <div className="text-slate-400 text-xs p-4 text-left font-normal">
+            <div>
+              <Link to="/forgotpassword">Forgot Password?</Link>
+            </div>
+          </div>
         }
-      ]}
-      emptyForm={{
-        email: "",
-        password: ""
-      }}
-
-
-      validateFunction={ValidateLogin}
-      onSubmit={onSubmit}
-      formSubmitButtonLabel="Sign In"
-      commonError={error}
-     
-      afterFormSection={<div className='text-slate-400 text-xs p-4 text-left font-normal'>
-        <div>
-        <Link to="/forgotpassword">Forgot Password?</Link>
-        </div>
-     </div>}   />
-     <div className='text-slate-400 text-xs font-normal '>
-     <Link to="/register">Don't have an Account?Create account</Link>
-     </div>
-     
-      
-      
-          
-  
-      
-      
-  
-      
-     
-      </HomePageScreen>
-      
-  
-  )
-}
+      />
+      <div className="text-slate-400 text-xs font-normal ">
+        <Link to="/register">Don't have an Account?Create account</Link>
+      </div>
+    </HomePageScreen>
+  );
+};
