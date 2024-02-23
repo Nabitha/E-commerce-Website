@@ -8,7 +8,6 @@ import favoriteRedIcon from '../../Asset/favoriteRedIcon.svg'
 import bluepluse from "../../Assets/images/blue-pluse.svg"
 import bluecart from "../../Assets/images/blue_cart.svg"
 import fullbluecart from "../../Assets/images/fulbuecart.svg"
-import useFetch from "../../Hooks/useFetch"
 interface PropsTypes{
     image:string,
     names:string,
@@ -18,16 +17,11 @@ interface PropsTypes{
     wishstatus:boolean
     cartstatus:boolean
 }
-// const { reload } = useFetch<PropsTypes[]>(wishlistdisplay);
-
 const Product = ({image,names,price,color,id,wishstatus,cartstatus}:PropsTypes) => {
     const navigate = useNavigate();
     const [fav, setFav] = useState(wishstatus);
     const [isOnCart,setIsOnCart] = useState(cartstatus);
     const [iszoom, setIsZoom] = useState(false);
-    const Zooming = () => {
-        setIsZoom((prev) => !prev);
-    };
     return(   
         <div onClick={()=>{   
             navigate(`/productdetails/${id}`)

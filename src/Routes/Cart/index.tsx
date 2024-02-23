@@ -1,5 +1,6 @@
 import check from "../../Assets/images/check.svg";
 import closebutton from "../../Assets/images/xbutton.svg";
+import buffer from "../../Assets/images/buffer.svg";
 import { cartdisplay } from "../../Services";
 import useFetch from "../../Hooks/useFetch";
 import { cartclear } from "../../Services";
@@ -18,7 +19,7 @@ interface DataType{
   _id: any;
 }[]
 const Cart = () => {
-  const { data, reload } = useFetch<DataType[]>(cartdisplay);
+  const { data, reload,loading,error } = useFetch<DataType[]>(cartdisplay);
   const onClearCart = async () => {
     const res = await cartclear();
     if (res.status) {
@@ -35,13 +36,19 @@ const Cart = () => {
   return (
     <div className="flex justify-center">
       <div className="grid ">
+      {data?.length===0 || !data ?"":
         <div className="grid grid-cols-5 place-items-center text-indigo-900 font-medium pb-5">
           <span>Product</span>
           <span>Price</span>
           <span>Quantity</span>
           <span>Total</span>
-        </div>
+        </div>}
         <div className="grid grid-cols-5 place-items-center gap-2 border-b border-gray-200  ">
+        {loading && <div  className=" text-center text-pink-500 text-2xl w-80 flex ml-20 "><img className="w-12 animate-spin" src={buffer}/> Loading...!</div>}
+        {!!error && error.message}
+          {data?.length===0 &&
+            <div className=" text-center text-pink-500 text-2xl w-80"> Your Cart is Empty</div>}
+    
           {data?.map((Cart) => (
             <Fragment key={Cart._id}>
               <span className="relative flex gap-2">
@@ -69,13 +76,14 @@ const Cart = () => {
             </Fragment>
           ))}
         </div>
+       { (data?.length === 0 || !data) ?"":
         <div className="flex place-self-end mt-4 w-52  pr-20">
           <Button
             label="Clear Cart"
             type="Primary"
             onClick={onClearCart}
           ></Button>
-        </div>
+        </div>}
       </div>
       <div>
         <div className="text-center  text-indigo-900 font-medium pb-5">
