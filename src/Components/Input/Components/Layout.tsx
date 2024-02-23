@@ -18,7 +18,7 @@ const Layout = ({error,type,children,isBlurred}:PropsTypes) => {
             </div>
             <div className=" text-red-500 text-start text-sm">{error && isBlurred && error}</div>
         </div>
-  )
-}
+    );
+};
 
-export default Layout
+export default Layout;

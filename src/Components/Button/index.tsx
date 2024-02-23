@@ -3,21 +3,21 @@ import { useMemo } from "react";
 type ButtonType = 'Primary' | 'Secondary' | 'Inline' | 'checkout';
 
 interface PropsTypes {
-  label: String;
-  type?: ButtonType;
-  onClick?: () => void;
-  action?: 'submit' | 'button';
-  disabled?: boolean;
-  loading?: boolean;
+    label: String;
+    type?: ButtonType;
+    onClick?: () => void;
+    action?: "submit" | "button";
+    disabled?: boolean;
+    loading?: boolean;
 }
 
 const Button = ({
-  label,
-  type = 'Primary',
-  onClick,
-  action = 'button',
-  disabled = false,
-  loading = false,
+    label,
+    type = "Primary",
+    onClick,
+    action = "button",
+    disabled = false,
+    loading = false
 }: PropsTypes) => {
   const getStyle = useMemo(
     () =>

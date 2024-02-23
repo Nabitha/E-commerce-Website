@@ -4,13 +4,13 @@ React SPA is a template project for creating single-page applications (SPAs) usi
 
 ## Features
 
-- Folder structure: Provides a recommended folder structure for React projects.
-- [Vite](https://vitejs.dev/): Uses Vite as the build tool, which provides a fast and modern development experience for web applications.
-- [Vitest](https://vitest.dev/): Includes pre-configured Vitest settings for testing.
-- [React Router](https://reactrouter.com): Includes pre-configured routing using React Router.
-- State management: Includes a pre-configured state management.
-- Basic forms: Includes basic form components and form validation using [joi](https://joi.dev/).
-- Data loading via [Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API): Includes pre-configured data loading from an API using Fetch.
+-   Folder structure: Provides a recommended folder structure for React projects.
+-   [Vite](https://vitejs.dev/): Uses Vite as the build tool, which provides a fast and modern development experience for web applications.
+-   [Vitest](https://vitest.dev/): Includes pre-configured Vitest settings for testing.
+-   [React Router](https://reactrouter.com): Includes pre-configured routing using React Router.
+-   State management: Includes a pre-configured state management.
+-   Basic forms: Includes basic form components and form validation using [joi](https://joi.dev/).
+-   Data loading via [Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API): Includes pre-configured data loading from an API using Fetch.
 
 ## Getting Started
 
