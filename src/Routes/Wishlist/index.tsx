@@ -20,10 +20,10 @@ const Wishlist = () =>{
             reload();
         }
     }
-    useEffect(()=>{
-        reload()
-    },
-    [data])
+    // useEffect(()=>{
+    //     reload()
+    // },
+    // [data])
     return(<>
 <div className="grid">
     {data?.length ===0  || !data?"":
