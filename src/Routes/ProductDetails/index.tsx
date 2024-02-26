@@ -9,7 +9,7 @@ import cartIcon from "../../Asset/cartIcon.svg";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import useFetch from "../../Hooks/useFetch";
 import { AboutProduct, Addcart, Addwishlist } from "../../Services";
-import { checktoken } from "../../Components/Layout";
+import { checkToken } from "../../Components/Layout";
 
 const ProductDetails = () => {
   const params = useParams();
@@ -49,7 +49,7 @@ const ProductDetails = () => {
                 id="Add-to-wishlist"
                 className="flex p-2 gap-5 justify-center shadow-md hover:cursor-pointer w-fit rounded-sm"
                 onClick={() => {
-                  if (checktoken()) {
+                  if (checkToken()) {
                     Addcart(data?._id);
                     setCartState(!cartState);
                   } else navigate("/login");
@@ -74,7 +74,7 @@ const ProductDetails = () => {
               id="Add-to-wishlist"
               className="flex p-2 gap-5 justify-center shadow-md hover:cursor-pointer w-fit rounded-sm"
               onClick={() => {
-                if (checktoken()) {
+                if (checkToken()) {
                   Addwishlist(data?._id);
                   setFav(!fav);
                 } else navigate("/login");
