@@ -13,38 +13,36 @@ type PropsTypes = {
     blurred?: boolean;
 };
 
-const UploadDocument = ({error,label,icon,blurred=false}:PropsTypes) => {
+const UploadDocument = ({
+    error,
+    label,
+    icon,
+    blurred = false
+}: PropsTypes) => {
     const fileRef = useRef<HTMLInputElement>(null);
-    
-  return (
-      <Layout
-        error={error}
-        isBlurred={blurred}
-      >
-          <div className="upload-field">
-              <input
-                type="file"
-                ref={fileRef}
-                />
-              <div
-                className="upload-button"
-                onClick={() => fileRef.current?.click()}
-                >
-                Browse
-                
-              </div>
-          </div>
-          <Label
-                label={(fileRef.current &&
-                     fileRef.current?.files &&
-                     fileRef.current?.files[0]?.name)
-                     || label}
-            />
-            <IconAndInfo
-                icon={icon}
-            />
-      </Layout>
-  )
-}
 
-export default UploadDocument
+    return (
+        <Layout error={error} isBlurred={blurred}>
+            <div className="upload-field">
+                <input type="file" ref={fileRef} />
+                <div
+                    className="upload-button"
+                    onClick={() => fileRef.current?.click()}
+                >
+                    Browse
+                </div>
+            </div>
+            <Label
+                label={
+                    (fileRef.current &&
+                        fileRef.current?.files &&
+                        fileRef.current?.files[0]?.name) ||
+                    label
+                }
+            />
+            <IconAndInfo icon={icon} />
+        </Layout>
+    );
+};
+
+export default UploadDocument;

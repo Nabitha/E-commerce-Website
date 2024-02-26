@@ -4,10 +4,14 @@ import buffer from "../../Assets/images/buffer.svg";
 import { cartdisplay } from "../../Services";
 import useFetch from "../../Hooks/useFetch";
 import { cartclear } from "../../Services";
+import { checkout } from "../../Services";
 import { removecartItem } from "../../Services";
 import Button from "../../Components/Button";
 import { Fragment, useState } from "react";
 import Quantity from "../../Components/Quantity";
+import { useNavigate } from "react-router-dom";
+import useAppContext from "../../Hooks/useAppContext";
+
 interface DataType{
   image: string;
   productName: string;
@@ -26,28 +30,42 @@ const Cart = () => {
       reload();
     }
   };
+  const {
+    reload: reloadHeader
+} = useAppContext();
+  const navigate = useNavigate();
+
+  const onCheckout = async () => {
+    const check =await checkout();
+    if(check.status){
+      navigate('/ordercompleted');
+    }
+  };
   const updateCartFn = async (id: string) => {
     const res = await removecartItem(id);
     if (res.status) {
       reload();
+      reloadHeader()
     }
   };
   const totalCost = ()=> data?.reduce((a,item)=>item.total+a,0) || 0
   return (
+    
     <div className="flex justify-center">
+      {data?.length===0 ?<div className='font-medium text-4xl h-56'>Your Cart is Empty!</div>:
       <div className="grid ">
-      {data?.length===0 || !data ?"":
-        <div className="grid grid-cols-5 place-items-center text-indigo-900 font-medium pb-5">
+      
+        {data&&<div className="grid grid-cols-5 place-items-center text-indigo-900 font-medium pb-5">
           <span>Product</span>
           <span>Price</span>
           <span>Quantity</span>
           <span>Total</span>
         </div>}
+        
         <div className="grid grid-cols-5 place-items-center gap-2 border-b border-gray-200  ">
-        {loading && <div  className=" text-center text-pink-500 text-2xl w-80 flex ml-20 "><img className="w-12 animate-spin" src={buffer}/> Loading...!</div>}
+        {loading && <div className="w-80 flex ml-20  absolute"><img className="w-12 animate-spin" src={buffer}/> </div>}
         {!!error && error.message}
-          {data?.length===0 &&
-            <div className=" text-center text-pink-500 text-2xl w-80"> Your Cart is Empty</div>}
+
     
           {data?.map((Cart) => (
             <Fragment key={Cart._id}>
@@ -70,7 +88,7 @@ const Cart = () => {
                 <img
                   onClick={() => {
                     updateCartFn(Cart._id);}}
-                  className="w-5"
+                  className="w-5 cursor-pointer"
                   src={closebutton}/>
               </span>
             </Fragment>
@@ -84,7 +102,8 @@ const Cart = () => {
             onClick={onClearCart}
           ></Button>
         </div>}
-      </div>
+      </div>}
+      { (data?.length === 0 || !data) ?"":
       <div>
         <div className="text-center  text-indigo-900 font-medium pb-5">
           Cart Totals
@@ -102,11 +121,12 @@ const Cart = () => {
             <img src={check} className="w-3 mx-2" />
             Shipping & taxes calculated at checkout
           </div>
-          <button className="bg-green-500 w-full text-white p-1 rounded">
-            Proceed To Checkout
-          </button>
+          <Button label="Proceed To Checkout" type="checkout"
+          onClick={onCheckout} />
+            
+          
         </div>
-      </div>
+      </div>}
     </div>
   );
 };

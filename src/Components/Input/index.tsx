@@ -32,15 +32,15 @@ const InputField = ({
   onPaste,
 
 }: PropsTypes) => {
-  const [isBlurred, setIsBlurred] = useState<boolean>(false);
+    const [isBlurred, setIsBlurred] = useState<boolean>(false);
 
-  useEffect(() => {
-    setIsBlurred(submitted);
-  }, [submitted]);
+    useEffect(() => {
+        setIsBlurred(submitted);
+    }, [submitted]);
 
-  const onBlur = () => {
-    setIsBlurred(true);
-  };
+    const onBlur = () => {
+        setIsBlurred(true);
+    };
 
   return (
     <Layout error={error} isBlurred={isBlurred} type={type}>

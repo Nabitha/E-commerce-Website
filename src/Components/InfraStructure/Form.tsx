@@ -3,7 +3,7 @@ import useForm, { ValidationError } from "../../Hooks/useForms";
 import { InputFieldType } from "../../Types/PropsTypes";
 import { SchemaValidationResponse } from "../../Utils/Validation";
 import Button from "../Button";
-import InputField from "../Input"
+import InputField from "../Input";
 
 type FormField = {
     field:string;
@@ -14,8 +14,8 @@ type FormField = {
     
 }
 
-interface PropsTypes <FormData>{
-    emptyForm: FormData,
+interface PropsTypes<FormData> {
+    emptyForm: FormData;
     defaultValues?: FormData;
     formStructure:FormField[];
     validateFunction: (d:FormData)=>SchemaValidationResponse;
@@ -31,7 +31,7 @@ interface PropsTypes <FormData>{
 
 }
 
-const Form = <FormData extends Record<string,any>,>({
+const Form = <FormData extends Record<string, any>>({
     emptyForm,
     defaultValues,
     formStructure,
@@ -108,4 +108,4 @@ const Form = <FormData extends Record<string,any>,>({
   )
 }
 
-export default Form
+export default Form;
