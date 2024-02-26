@@ -86,7 +86,7 @@ const Form = <FormData extends Record<string,any>,>({
 })}
         </div>
         {afterFormSection}
-        <div className="flex gap-44 pt-4 items-center">
+        <div className="flex pt-4">
             
         
                     

@@ -32,22 +32,16 @@ export const OtpVerification = () => {
       return false;
     }
     localStorage.setItem('token', res.data.token);
-
-      navigate('/ResetPassword')
-     
-      return true;
-  
-    }
-   
-   
-
+    navigate('/ResetPassword')
+    return true;
+   }
+    
     const handlePaste = (event: React.ClipboardEvent<HTMLInputElement>) => {
       const pastedData = event.clipboardData.getData('text/plain');
       const extractedOtp = pastedData.slice(0, 5);
     };
-
-  return (
-    <div className=''>
+    return (
+    <div>
     
     <HomePageScreen title='OTP Verification' link='/login' linkLabel='Back'>
 

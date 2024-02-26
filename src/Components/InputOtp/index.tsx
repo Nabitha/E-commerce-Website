@@ -7,7 +7,7 @@ interface Props{
 
 }
 
-export const InputOtp = ({ length = 5, onChange, value = '' }: Props) => {
+export const InputOtp = ({ length = 5, onChange}: Props) => {
     const [otpDigits, setOtpDigits] = useState<string[]>(['', '', '', '', '']);
     
 
@@ -43,7 +43,7 @@ const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
 };
 
   return (
-    <div className='flex gap-4  '>
+    <div className='flex gap-8  '>
    {otpDigits.map((digit,index)=>
              <input 
              key={index}
