@@ -14,43 +14,55 @@ import { useEffect, useState } from "react";
 import useFetch from "../../Hooks/useFetch";
 import { cartdisplay } from "../../Services";
 import AppContext from "../../Contexts/AppContext";
-import { productlist } from '../../Services';
+import { productlist } from "../../Services";
 
 interface PropsTypes {
-  children?: React.ReactNode;
+    children?: React.ReactNode;
 }
 export function checkToken() {
   const token = localStorage.getItem("token");
   return token !== null;
 }
 function removeToken() {
-  localStorage.removeItem("token");
+    localStorage.removeItem("token");
 }
 
 const Layout = ({ children }: PropsTypes) => {
-  const location = useLocation();
-  const [productName,setProductName] =useState("")
-  const [pathName, setPathName] = useState("");
-  const { data, reload: reloadCart } = useFetch<any>(cartdisplay);
-  const { data: user } = useFetch<any>(getUser);
-  const {data:productList,reload:reloadProductList} =useFetch<any>(`${productlist}?search=${productName}`)
-  useEffect(() => {
-    setPathName(location.pathname);
-  }, [location.pathname]);
-    
-  const reload = ()=>{
-    reloadCart();
-  }
+    const location = useLocation();
+    const [productName, setProductName] = useState("");
+    const [pathName, setPathName] = useState("");
+    const { data, reload: reloadCart } = useFetch<any>(cartdisplay);
+    const { data: user } = useFetch<any>(getUser);
+    const { data: productList, reload: reloadProductList } = useFetch<any>(
+        `${productlist}?search=${productName}`
+    );
+    useEffect(() => {
+        setPathName(location.pathname);
+    }, [location.pathname]);
+
+    const reload = () => {
+        reloadCart();
+    };
     const navigate = useNavigate();
     return (
-        <AppContext.Provider value={{reload,productList}}>
-         <div className="sticky top-0 z-50 bg-violet-600 text-white font-semibold flex items-center justify-around  py-4 pr-10"> 
-         <div className="flex items-center gap-16">
-                <span><img src={logo}/></span>
-                <span className="flex gap-4 font-medium  ">
-                <span className="hover:text-pink-500">Home </span>
-                <span className={`${("/products"===pathName)?'text-pink-500':' hover:text-pink-500'}`}><Link to="/products">Products</Link></span>
-                </span>
+        <AppContext.Provider value={{ reload, productList }}>
+            <div className="sticky top-0 z-50 bg-violet-600 text-white font-semibold flex items-center justify-around  py-4 pr-10">
+                <div className="flex items-center gap-16">
+                    <span>
+                        <img src={logo} />
+                    </span>
+                    <span className="flex gap-4 font-medium  ">
+                        <span className="hover:text-pink-500">Home </span>
+                        <span
+                            className={`${
+                                "/products" === pathName
+                                    ? "text-pink-500"
+                                    : " hover:text-pink-500"
+                            }`}
+                        >
+                            <Link to="/products">Products</Link>
+                        </span>
+                    </span>
                 </div>
                 <div className="relative w-full max-w-80 max-lg:max-w-36 ">
                     <input type="text" placeholder="Search. . ." className="border-2 rounded border-blueGray-200 text-black px-2 pr-10 w-full" onChange={(e)=>setProductName(e.target.value)}/> 

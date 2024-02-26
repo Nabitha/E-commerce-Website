@@ -23,3 +23,5 @@ export const Addwishlist = (id: string) =>
 export const AboutProduct = (id: string) => `/user/product-detail?id=${id}`;
 export const removecartItem = (id: string) =>
   postCall(`/user/remove-item?id=${id}`);
+export const relatedProducts = (categoryName: string) =>
+  `/user/category?categoryName=${categoryName}`;
