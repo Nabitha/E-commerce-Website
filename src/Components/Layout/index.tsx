@@ -19,7 +19,7 @@ import { productlist } from '../../Services';
 interface PropsTypes {
   children?: React.ReactNode;
 }
-export function checktoken() {
+export function checkToken() {
   const token = localStorage.getItem("token");
   return token !== null;
 }
@@ -56,8 +56,7 @@ const Layout = ({ children }: PropsTypes) => {
                     <input type="text" placeholder="Search. . ." className="border-2 rounded border-blueGray-200 text-black px-2 pr-10 w-full" onChange={(e)=>setProductName(e.target.value)}/> 
                 <button onClick={()=>{; 
                   reloadProductList()
-                  navigate("/search")
-                } } className="p-1 rounded right-0 absolute"><img className="w-6" src={search} />
+                  } } className="p-1 rounded right-0 absolute"><img className="w-6" src={search} />
                 </button>
                 </div>
         <div className="flex  items-center gap-8">
@@ -68,7 +67,7 @@ const Layout = ({ children }: PropsTypes) => {
                 : " flex gap-1 hover:text-pink-500"
             }`}
           >
-            {checktoken() ? (
+            {checkToken() ? (
               <span>{user?.name} </span>
             ) : (
               <Link to="/login"> Login </Link>
@@ -78,7 +77,7 @@ const Layout = ({ children }: PropsTypes) => {
             </span>
           </span>
 
-          {checktoken() ? (
+          {checkToken() ? (
             <Link to="/wishlist">
               <span
                 className={`${
@@ -95,7 +94,7 @@ const Layout = ({ children }: PropsTypes) => {
             ""
           )}
           <span className="relative ">
-            {checktoken() ? (
+            {checkToken() ? (
               <Link to="/cart">
                 <img
                   className="w-6"
@@ -110,7 +109,7 @@ const Layout = ({ children }: PropsTypes) => {
             )}
           </span>
           <span>
-            {checktoken() ? (
+            {checkToken() ? (
               <Button
                 label="Logout"
                 onClick={() => {
