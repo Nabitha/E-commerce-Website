@@ -54,9 +54,7 @@ const Layout = ({ children }: PropsTypes) => {
                 </div>
                 <div className="relative w-full max-w-80 max-lg:max-w-36 ">
                     <input type="text" placeholder="Search. . ." className="border-2 rounded border-blueGray-200 text-black px-2 pr-10 w-full" onChange={(e)=>setProductName(e.target.value)}/> 
-                <button onClick={()=>{; 
-                  reloadProductList()
-                  } } className="p-1 rounded right-0 absolute"><img className="w-6" src={search} />
+                <button onClick={reloadProductList} className="p-1 rounded right-0 absolute"><img className="w-6" src={search} />
                 </button>
                 </div>
         <div className="flex  items-center gap-8">
@@ -77,7 +75,8 @@ const Layout = ({ children }: PropsTypes) => {
             </span>
           </span>
 
-          {checkToken() ? (
+          {checkToken() && (
+            <div>
             <Link to="/wishlist">
               <span
                 className={`${
@@ -90,26 +89,20 @@ const Layout = ({ children }: PropsTypes) => {
                 <img className="w-5" src={heart} />
               </span>
             </Link>
-          ) : (
-            ""
-          )}
           <span className="relative ">
-            {checkToken() ? (
+             
               <Link to="/cart">
                 <img
                   className="w-6"
-                  src={"/cart" === pathName ? pinkcart : cart}
+                  src={pathName === "/cart" ? pinkcart : cart}
                 />
                 <div className="absolute flex items-center justify-center -right-3  -top-3 w-5 h-5 rounded-full bg-white   text-md text-pink-500 ">
                   <div> {data?.length || 0}</div>
                 </div>
               </Link>
-            ) : (
-              ""
-            )}
+           
           </span>
           <span>
-            {checkToken() ? (
               <Button
                 label="Logout"
                 onClick={() => {
@@ -117,10 +110,8 @@ const Layout = ({ children }: PropsTypes) => {
                   removeToken();
                 }}
               />
-            ) : (
-              ""
-            )}
           </span>
+          </div>)}
         </div>
       </div>
       <div className="flex gap-96 py-2 justify-center"></div>
