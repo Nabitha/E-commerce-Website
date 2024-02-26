@@ -28,7 +28,6 @@ const Cart = () => {
     const res = await cartclear();
     if (res.status) {
       reload();
-      reloadHeader()
     }
   };
   const {
@@ -40,7 +39,6 @@ const Cart = () => {
     const check =await checkout();
     if(check.status){
       navigate('/ordercompleted');
-      reloadHeader()
     }
   };
   const updateCartFn = async (id: string) => {
@@ -90,7 +88,7 @@ const Cart = () => {
                 <img
                   onClick={() => {
                     updateCartFn(Cart._id);}}
-                  className="w-5"
+                  className="w-5 cursor-pointer"
                   src={closebutton}/>
               </span>
             </Fragment>

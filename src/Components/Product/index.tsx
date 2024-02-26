@@ -1,6 +1,6 @@
 import Hoveritem from "../../Components/Hoverimg";
 import { useState } from "react";
-import { Addcart, removecartItem, wishlistdisplay } from "../../Services";
+import { Addcart, removecartItem } from "../../Services";
 import { Addwishlist } from "../../Services";
 import { useNavigate } from "react-router-dom";
 import favorite from "../../Asset/favoriteIcon.svg";
@@ -13,7 +13,6 @@ interface PropsTypes {
   image: string;
   names: string;
   price: string | number;
-  color?: string;
   id?: any;
   wishstatus?: boolean;
   cartstatus: boolean;
@@ -27,8 +26,7 @@ const Product = ({
   image,
   names,
   price,
-  color,
-  id,
+   id,
   wishstatus,
   cartstatus,
   reload
@@ -93,10 +91,7 @@ const Product = ({
         <div className="text-indigo-900 font-bold w-56 text-center">
           {names}
         </div>
-        <div>
-          <img src={color} />
-        </div>
-        <div>
+          <div>
           <span className="text-indigo-900 font-normal">${price} </span>
         </div>
       </div>

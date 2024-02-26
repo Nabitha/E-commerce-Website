@@ -5,7 +5,8 @@ export type AppState = {
 };
 
 interface AppData {
-    reload:()=>void
+    reload:()=>void;
+    productList:any[];
 }
 
 export default AppData;

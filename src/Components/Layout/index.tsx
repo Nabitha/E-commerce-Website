@@ -14,6 +14,8 @@ import { useEffect, useState } from "react";
 import useFetch from "../../Hooks/useFetch";
 import { cartdisplay } from "../../Services";
 import AppContext from "../../Contexts/AppContext";
+import { productlist } from '../../Services';
+
 interface PropsTypes {
   children?: React.ReactNode;
 }
@@ -27,9 +29,11 @@ function removeToken() {
 
 const Layout = ({ children }: PropsTypes) => {
   const location = useLocation();
+  const [productName,setProductName] =useState("")
   const [pathName, setPathName] = useState("");
   const { data, reload: reloadCart } = useFetch<any>(cartdisplay);
   const { data: user } = useFetch<any>(getUser);
+  const {data:productList,reload:reloadProductList} =useFetch<any>(`${productlist}?search=${productName}`)
   useEffect(() => {
     setPathName(location.pathname);
   }, [location.pathname]);
@@ -39,7 +43,7 @@ const Layout = ({ children }: PropsTypes) => {
   }
     const navigate = useNavigate();
     return (
-        <AppContext.Provider value={{reload}}>
+        <AppContext.Provider value={{reload,productList}}>
          <div className="sticky top-0 z-50 bg-violet-600 text-white font-semibold flex items-center justify-around  py-4 pr-10"> 
          <div className="flex items-center gap-16">
                 <span><img src={logo}/></span>
@@ -49,8 +53,11 @@ const Layout = ({ children }: PropsTypes) => {
                 </span>
                 </div>
                 <div className="relative w-full max-w-80 max-lg:max-w-36 ">
-                    <input type="text" placeholder="Search. . ." className="border-2 rounded border-blueGray-200 text-black px-2 pr-10 w-full"/> 
-                <button className="p-1 rounded right-0 absolute"><img className="w-6" src={search} />
+                    <input type="text" placeholder="Search. . ." className="border-2 rounded border-blueGray-200 text-black px-2 pr-10 w-full" onChange={(e)=>setProductName(e.target.value)}/> 
+                <button onClick={()=>{; 
+                  reloadProductList()
+                  navigate("/search")
+                } } className="p-1 rounded right-0 absolute"><img className="w-6" src={search} />
                 </button>
                 </div>
         <div className="flex  items-center gap-8">

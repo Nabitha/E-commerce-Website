@@ -11,6 +11,7 @@ import ProductDetails from "./ProductDetails";
 import ResetPassword from "./ResetPassword";
 import Wishlist from "./Wishlist";
 import { OtpVerification } from "./OtpVerification"
+import Search from "./Search";
 
 
 const Router = () => {
@@ -29,6 +30,7 @@ const Router = () => {
         <Route path="/ResetPassword" element={<ResetPassword />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/otpverification" element={<OtpVerification/>}/>
+        <Route path="/search" element={<Search/>}/>
       </Routes>
     </Layout>
   );
