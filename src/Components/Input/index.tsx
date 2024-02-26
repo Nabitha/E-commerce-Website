@@ -17,6 +17,7 @@ type PropsTypes = {
   onChange: (value: string, e: any) => void;
   submitted?: boolean;
   placeholder?:string;
+  onPaste?: (event: React.ClipboardEvent<HTMLInputElement>) => void;
 };
 
 const InputField = ({
@@ -28,6 +29,7 @@ const InputField = ({
   onChange,
   disabled = false,
   submitted = false,
+  onPaste,
 
 }: PropsTypes) => {
     const [isBlurred, setIsBlurred] = useState<boolean>(false);
@@ -65,6 +67,7 @@ const InputField = ({
           onBlur={onBlur}
           className="rounded-sm border w-full p-2 font-normal text-xs"
           placeholder={placeholder}
+          onPaste={onPaste} 
         />
       )}
     </Layout>

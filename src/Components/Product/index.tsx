@@ -1,6 +1,6 @@
 import Hoveritem from "../../Components/Hoverimg";
 import { useState } from "react";
-import { Addcart, removecartItem, wishlistdisplay } from "../../Services";
+import { Addcart, removecartItem } from "../../Services";
 import { Addwishlist } from "../../Services";
 import { useNavigate } from "react-router-dom";
 import favorite from "../../Asset/favoriteIcon.svg";
@@ -18,6 +18,10 @@ interface PropsTypes {
     wishstatus?: boolean;
     cartstatus: boolean;
     reload?: () => void;
+}
+export function checktoken() {
+    const token = localStorage.getItem("token");
+    return token !== null;
 }
 const Product = ({
     image,

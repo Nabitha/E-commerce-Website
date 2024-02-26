@@ -1,13 +1,1 @@
-<svg version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
-</style>
-<line class="st0" x1="16" y1="3" x2="16" y2="8" id="id_101" style="stroke: rgb(252, 50, 124);"></line>
-<line class="st0" x1="6.8" y1="6.8" x2="10.3" y2="10.3" id="id_102" style="stroke: rgb(247, 49, 122);"></line>
-<line class="st0" x1="3" y1="16" x2="8" y2="16" id="id_103" style="stroke: rgb(232, 46, 114);"></line>
-<line class="st0" x1="6.8" y1="25.2" x2="10.3" y2="21.7" id="id_104" style="stroke: rgb(230, 46, 113);"></line>
-<line class="st0" x1="16" y1="29" x2="16" y2="24" id="id_105" style="stroke: rgb(245, 54, 124);"></line>
-<line class="st0" x1="25.2" y1="25.2" x2="21.7" y2="21.7" id="id_106" style="stroke: rgb(240, 43, 115);"></line>
-<line class="st0" x1="29" y1="16" x2="24" y2="16" id="id_107" style="stroke: rgb(240, 45, 117);"></line>
-<line class="st0" x1="25.2" y1="6.8" x2="21.7" y2="10.3" id="id_108" style="stroke: rgb(235, 42, 113);"></line>
-</svg>
+<svg class="svg-icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M512.056 908.647c-84.516 0-166.416-27.084-235.266-78.637-84.15-63.028-138.741-155.109-153.675-259.2-14.934-104.119 11.559-207.816 74.588-291.994 130.162-173.812 377.438-209.25 551.194-79.172 72.844 54.562 124.819 133.228 146.391 221.484 3.684 15.103-5.569 30.319-20.644 34.003-15.075 3.572-30.319-5.541-34.003-20.644-18.45-75.628-63-143.044-125.466-189.816-148.866-111.516-360.844-81.112-472.444 67.866-54.028 72.141-76.725 161.016-63.9 250.256 12.797 89.241 59.597 168.131 131.737 222.131 149.006 111.656 360.956 81.197 472.5-67.781 29.194-39.009 49.219-82.716 59.456-129.938 3.319-15.188 18.366-24.834 33.441-21.544 15.188 3.291 24.834 18.281 21.544 33.441-12.009 55.181-35.353 106.2-69.413 151.762-63.028 84.15-155.109 138.769-259.256 153.675-18.984 2.756-37.941 4.106-56.784 4.106z"  /></svg>

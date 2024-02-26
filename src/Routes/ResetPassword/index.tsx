@@ -7,14 +7,13 @@ import { PasswordReset } from "../../Services";
 
 const ResetPassword = () => {
   const [error, setError] = useState('');
-  
-  
-  
   const navigate = useNavigate();
   const OnSubmit = async (data: any) => {
-    
-    console.log("in");
-    PasswordReset(data);
+  const res= await PasswordReset(data);
+    if (!res.status) {
+      setError(res.message)
+          return false;
+        }
     navigate("/login");
   };
   
@@ -59,6 +58,7 @@ const ResetPassword = () => {
           }}
           onSubmit={OnSubmit}
           formSubmitButtonLabel="Reset"
+          commonError={error}
           afterFormSection={<></>}
         />
       </HomePageScreen>

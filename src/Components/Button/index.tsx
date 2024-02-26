@@ -1,4 +1,6 @@
 import { useMemo } from "react";
+import useAppContext from "../../Hooks/useAppContext";
+
 
 type ButtonType = 'Primary' | 'Secondary' | 'Inline' | 'checkout';
 
@@ -19,6 +21,9 @@ const Button = ({
     disabled = false,
     loading = false
 }: PropsTypes) => {
+  const {
+    reload: reloadHeader
+} = useAppContext()
   const getStyle = useMemo(
     () =>
     ({
@@ -39,7 +44,11 @@ const Button = ({
   return (
     <button
     className={getStyle}
-      onClick={() => !loading && onClick?.()}
+      onClick={() => {if (!loading)
+        {
+          onClick?.();
+          reloadHeader()
+        }}}
       type={action}
       disabled={loading || disabled}
     >

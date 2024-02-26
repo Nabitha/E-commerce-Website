@@ -14,6 +14,8 @@ import { useEffect, useState } from "react";
 import useFetch from "../../Hooks/useFetch";
 import { cartdisplay } from "../../Services";
 import AppContext from "../../Contexts/AppContext";
+import { productlist } from "../../Services";
+
 interface PropsTypes {
     children?: React.ReactNode;
 }
@@ -27,9 +29,13 @@ function removeToken() {
 
 const Layout = ({ children }: PropsTypes) => {
     const location = useLocation();
+    const [productName, setProductName] = useState("");
     const [pathName, setPathName] = useState("");
     const { data, reload: reloadCart } = useFetch<any>(cartdisplay);
     const { data: user } = useFetch<any>(getUser);
+    const { data: productList, reload: reloadProductList } = useFetch<any>(
+        `${productlist}?search=${productName}`
+    );
     useEffect(() => {
         setPathName(location.pathname);
     }, [location.pathname]);
@@ -39,7 +45,7 @@ const Layout = ({ children }: PropsTypes) => {
     };
     const navigate = useNavigate();
     return (
-        <AppContext.Provider value={{ reload }}>
+        <AppContext.Provider value={{ reload, productList }}>
             <div className="sticky top-0 z-50 bg-violet-600 text-white font-semibold flex items-center justify-around  py-4 pr-10">
                 <div className="flex items-center gap-16">
                     <span>
@@ -63,8 +69,15 @@ const Layout = ({ children }: PropsTypes) => {
                         type="text"
                         placeholder="Search. . ."
                         className="border-2 rounded border-blueGray-200 text-black px-2 pr-10 w-full"
+                        onChange={(e) => setProductName(e.target.value)}
                     />
-                    <button className="p-1 rounded right-0 absolute">
+                    <button
+                        onClick={() => {
+                            reloadProductList();
+                            navigate("/search");
+                        }}
+                        className="p-1 rounded right-0 absolute"
+                    >
                         <img className="w-6" src={search} />
                     </button>
                 </div>
@@ -135,7 +148,7 @@ const Layout = ({ children }: PropsTypes) => {
             <div className="flex gap-96 py-2 justify-center"></div>
             <div className="p-8">{children}</div>
             <div className="pt-5">
-                <div className="flex justify-center justify-around gap-12 bg-indigo-50 py-8 text-indigo-400">
+                <div className=" flex justify-center gap-12 bg-indigo-50 py-8 text-indigo-400">
                     <div className="flex flex-col gap-2">
                         <div className="text-2xl text-black font-medium">
                             Catagories

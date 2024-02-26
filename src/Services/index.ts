@@ -1,6 +1,6 @@
 import postCall from "./postCall";
 
-export const RegisterSubmit = (data: any) => postCall(`/auth/sign-up`, data);
+export const RegisterSubmit = (data: object) => postCall(`/auth/sign-up`, data);
 export const loginCall = (data: object) => postCall(`/auth/login`, data);
 export const forgotPassword = (data: object) =>
   postCall(`/auth/forgot-password-sendOtp`, data);

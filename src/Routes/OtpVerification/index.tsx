@@ -31,22 +31,28 @@ export const OtpVerification = () => {
       );
       return false;
     }
-      navigate('/ResetPassword')
-     
-      return true;
-  
-    }
-   
-
-  return (
-    <HomePageScreen title='Forgot Password' link='/login' linkLabel='Back'>
+    localStorage.setItem('token', res.data.token);
+    navigate('/ResetPassword')
+    return true;
+   }
+    
+    const handlePaste = (event: React.ClipboardEvent<HTMLInputElement>) => {
+      const pastedData = event.clipboardData.getData('text/plain');
+      const extractedOtp = pastedData.slice(0, 5);
+    };
+    return (
+    <div>
+    
+    <HomePageScreen title='OTP Verification' link='/login' linkLabel='Back'>
 
     <Form 
     
     formStructure = {[
         {
             field: "otp",
-            type: 'otp'
+            type: 'otp',
+            onPaste: handlePaste
+            
             },
     ]}
     emptyForm={{
@@ -57,12 +63,13 @@ export const OtpVerification = () => {
     serverError={serverError}
     formSubmitButtonLabel="Verify OTP"
     commonError={error}
+    
     />
         
    </HomePageScreen>
       
         
-      
+   </div>  
     
   
       

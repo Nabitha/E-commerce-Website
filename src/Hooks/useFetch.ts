@@ -26,6 +26,7 @@ const useFetch = <D, E = void>(
     const [recallScale, setRecallScale] = useState(1);
     const signalRef = useRef<boolean>();
     const timerRef = useRef<NodeJS.Timeout>();
+    
 
     useEffect(() => {
         signalRef.current = true;
