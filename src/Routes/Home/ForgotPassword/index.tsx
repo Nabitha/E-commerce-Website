@@ -26,6 +26,7 @@ export const ForgotPassword = () => {
       );
       return false;
     }
+    localStorage.setItem("token", res.data.token);
     navigate('/otpverification', {
       state: data
   });

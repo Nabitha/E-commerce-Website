@@ -10,6 +10,8 @@ type FormField = {
     label?:string;
     type?:InputFieldType
     placeholder?:string;
+    onPaste?: (event: React.ClipboardEvent<HTMLInputElement>) => void;
+    
 }
 
 interface PropsTypes <FormData>{
@@ -23,7 +25,10 @@ interface PropsTypes <FormData>{
     serverError?:ValidationError[];
     afterFormSection?:ReactNode;
     onBack?:()=>void;
+    
     commonError?:string
+    onPaste?: (event: React.ClipboardEvent<HTMLInputElement>) => void;
+
 }
 
 const Form = <FormData extends Record<string,any>,>({
@@ -35,7 +40,8 @@ const Form = <FormData extends Record<string,any>,>({
     serverError,
     formSubmitButtonLabel,
     afterFormSection,
-    commonError
+    commonError,
+    onPaste
 }:PropsTypes<FormData>) => {
 
     const {
@@ -49,7 +55,8 @@ const Form = <FormData extends Record<string,any>,>({
         defaultValues,
         validateFunction,
         onSubmit,
-        serverError
+        serverError,
+        
         
         
     })
@@ -57,6 +64,7 @@ const Form = <FormData extends Record<string,any>,>({
   return (
     <form className="p-8"
      onSubmit={submit}>
+            
         {commonError && (
                 <div className=" text-sm text-red-600 my-8 p-2 border-l-2 border-red-600 bg-slate-200">
                     {commonError}
@@ -71,6 +79,9 @@ const Form = <FormData extends Record<string,any>,>({
                 value={formData[field.field]}
                 onChange={(v)=>onChange(field.field,v)}
                 error={formError[field.field]}
+                onPaste={field.onPaste}
+            
+                
             />
 })}
         </div>

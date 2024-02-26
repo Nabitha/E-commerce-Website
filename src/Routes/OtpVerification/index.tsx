@@ -39,6 +39,12 @@ export const OtpVerification = () => {
   
     }
    
+   
+
+    const handlePaste = (event: React.ClipboardEvent<HTMLInputElement>) => {
+      const pastedData = event.clipboardData.getData('text/plain');
+      const extractedOtp = pastedData.slice(0, 5);
+    };
 
   return (
     <div className=''>
@@ -50,7 +56,9 @@ export const OtpVerification = () => {
     formStructure = {[
         {
             field: "otp",
-            type: 'otp'
+            type: 'otp',
+            onPaste: handlePaste
+            
             },
     ]}
     emptyForm={{
@@ -61,6 +69,7 @@ export const OtpVerification = () => {
     serverError={serverError}
     formSubmitButtonLabel="Verify OTP"
     commonError={error}
+    
     />
         
    </HomePageScreen>
