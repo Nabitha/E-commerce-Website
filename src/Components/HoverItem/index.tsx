@@ -4,7 +4,7 @@ interface PropsTypes {
     onClick?: () => void;
     icon:string
 }
-const Hoveritem = ({
+const HoverItem = ({
     onClick,icon
 }:PropsTypes)=>{
   
@@ -22,6 +22,6 @@ const Hoveritem = ({
       );
 
 }
-export default Hoveritem
+export default HoverItem
 
 

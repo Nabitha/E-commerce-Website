@@ -39,7 +39,7 @@ const Cart = () => {
   const onCheckout = async () => {
     const check =await checkout();
     if(check.status){
-      navigate('/ordercompleted');
+      navigate('/orderCompleted');
       reloadHeader();
     }
   };
