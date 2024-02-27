@@ -21,14 +21,14 @@ const Router = () => {
         <Route path="/cart" element={<Cart />} />
         <Route path="/products" element={<Productlist />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/forgotpassword" element={<ForgotPassword />} />
+        <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/register" element={<Register />} />
         <Route path="/ordercompleted" element={<OrderCompleted />} />
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/ProductDetails/:id" element={<ProductDetails />} />
         <Route path="/ResetPassword" element={<ResetPassword />} />
         <Route path="/wishlist" element={<Wishlist />} />
-        <Route path="/otpverification" element={<OtpVerification/>}/>
+        <Route path="/otpVerification" element={<OtpVerification/>}/>
       </Routes>
     </Layout>
   );
