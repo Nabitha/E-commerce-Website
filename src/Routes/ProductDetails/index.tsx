@@ -16,7 +16,7 @@ import {
     Addwishlist,
     relatedProducts
 } from "../../Services";
-import { checktoken } from "../../Components/Layout";
+import { checkToken } from "../../Components/Layout";
 
 const ProductDetails = () => {
     const params = useParams();
@@ -80,7 +80,7 @@ const ProductDetails = () => {
                                 id="Add-to-cart"
                                 className="flex p-2 gap-5 justify-center shadow-md hover:cursor-pointer w-fit rounded-sm"
                                 onClick={async () => {
-                                    if (checktoken()) {
+                                    if (checkToken()) {
                                         await Addcart(details?._id);
                                     } else navigate("/login");
                                     reload();
@@ -94,7 +94,7 @@ const ProductDetails = () => {
                             id="Add-to-wishlist"
                             className="flex p-2 gap-5 justify-center shadow-md hover:cursor-pointer w-fit rounded-sm"
                             onClick={async () => {
-                                if (checktoken()) {
+                                if (checkToken()) {
                                     await Addwishlist(details?._id);
                                     reload();
                                 } else navigate("/login");

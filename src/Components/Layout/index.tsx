@@ -1,4 +1,4 @@
-import { getUser } from "../../Services";
+import { cartItemCount, getUser,productlist } from "../../Services";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Button from "../Button";
 import login from "../../Assets/images/carbon_user.svg";
@@ -12,9 +12,7 @@ import pinkcart from "../../Assets/images/pinkcart.svg";
 import instagram from "../../Assets/images/insta.svg";
 import { useEffect, useState } from "react";
 import useFetch from "../../Hooks/useFetch";
-import { cartdisplay } from "../../Services";
 import AppContext from "../../Contexts/AppContext";
-import { productlist } from "../../Services";
 
 interface PropsTypes {
     children?: React.ReactNode;
@@ -31,7 +29,7 @@ const Layout = ({ children }: PropsTypes) => {
     const location = useLocation();
     const [productName, setProductName] = useState("");
     const [pathName, setPathName] = useState("");
-    const { data, reload: reloadCart } = useFetch<any>(cartdisplay);
+    const { data, reload: reloadCart } = useFetch<any>(cartItemCount);
     const { data: user } = useFetch<any>(getUser);
     const { data: productList, reload: reloadProductList } = useFetch<any>(
         `${productlist}?search=${productName}`
@@ -44,6 +42,7 @@ const Layout = ({ children }: PropsTypes) => {
         reloadCart();
     };
     const navigate = useNavigate();
+    const Count =data;
     return (
         <AppContext.Provider value={{ reload, productList }}>
             <div className="sticky top-0 z-50 bg-violet-600 text-white font-semibold flex items-center justify-around  py-4 pr-10">
@@ -88,7 +87,7 @@ const Layout = ({ children }: PropsTypes) => {
           </span>
 
           {checkToken() && (
-            <div>
+            <>
             <Link to="/wishlist">
               <span
                 className={`${
@@ -109,7 +108,7 @@ const Layout = ({ children }: PropsTypes) => {
                   src={pathName === "/cart" ? pinkcart : cart}
                 />
                 <div className="absolute flex items-center justify-center -right-3  -top-3 w-5 h-5 rounded-full bg-white   text-md text-pink-500 ">
-                  <div> {data?.length || 0}</div>
+                  <div> {data?.count||0}</div>
                 </div>
               </Link>
            
@@ -123,7 +122,7 @@ const Layout = ({ children }: PropsTypes) => {
                 }}
               />
           </span>
-          </div>)}
+          </>)}
         </div>
       </div>
       <div className="flex gap-96 py-2 justify-center"></div>
@@ -146,7 +145,7 @@ const Layout = ({ children }: PropsTypes) => {
         </div>
         <div className="flex place-content-evenly gap-96 bg-violet-100 py-3">
           <span className="text-coolGray-400">
-            ©Webecy - All Rights Reserved
+            ©$$- All Rights Reserved
           </span>
           <span className="flex gap-2">
             <img src={fb} />

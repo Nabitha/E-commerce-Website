@@ -11,6 +11,7 @@ export const PasswordReset = (data: object) =>
 export const getUser = `/user/getuser`;
 export const productlist = `/user/all-item`;
 export const cartdisplay = `/user/display-cart`;
+export const cartItemCount= "/user/cart-ItemCount";
 export const checkout = () => postCall (`/user/checkout`);
 export const cartclear = () => postCall(`/user/clear-cart`);
 export const cartupdate = (id: string, quantity: number) =>

@@ -2,16 +2,15 @@ import Product from "../../Components/Product"
 import useFetch from "../../Hooks/useFetch"
 import { wishlistclear, wishlistdisplay } from "../../Services"
 import Button from "../../Components/Button"
-import { useEffect } from "react"
 import buffer from "../../Assets/images/buffer.svg"
 const Wishlist = () =>{
     const { data,reload,loading,error } = useFetch<{
-        image: string,
-        productName:string,
-        price:number
-        _id:any
-        inCart:boolean
-        inWishlist:boolean        
+    image: string;
+    productName: string;
+    price: string | number;
+    _id?: string;
+    wishstatus?: boolean;
+    cartstatus: boolean;    
 }[]>(
     wishlistdisplay )
     const onWishlist = async ()=>{
@@ -31,8 +30,7 @@ const Wishlist = () =>{
         {!!error && error.message}
         
         {data?.map((product,index)=>(
-            <Product key={index} image={product.image} names={product.productName} price={product.price} 
-            id={product._id} reload={reload} cartstatus={product.inCart}/>  
+            <Product key={index} productData={product} reload={reload} />  
             ))} 
     </div>
 </div>
