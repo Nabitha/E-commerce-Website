@@ -11,21 +11,18 @@ import fullbluecart from "../../Assets/images/fulbuecart.svg";
 import useAppContext from "../../Hooks/useAppContext";
 import { checkToken } from "../Layout";
 interface PropsTypes {
-  productData:{
-    image: string;
-    productName: string;
-    price: string | number;
-    _id?: string;
-    inWishlist?: boolean;
-    inCart: boolean;
-  }
+    productData: {
+        image: string;
+        productName: string;
+        price: string | number;
+        _id?: string;
+        inWishlist?: boolean;
+        inCart: boolean;
+    };
     reload?: () => void;
 }
 
-const Product = ({
-    productData,
-    reload
-}: PropsTypes) => {
+const Product = ({ productData, reload }: PropsTypes) => {
     const { reload: reloadHeader } = useAppContext();
     const navigate = useNavigate();
     const [fav, setFav] = useState(productData.inWishlist);
@@ -39,35 +36,42 @@ const Product = ({
         >
             <div className="group relative bg-gray-100 grid place-items-center hover:bg-gray-300 h-60 w-60 ">
                 <div className="absolute left-4 bottom-3 grid gap-2 hidden group-hover:grid ">
-                    {checkToken()&&(<><Hoveritem
-                        icon={isOnCart ? fullbluecart : bluecart}
-                        onClick={async () => { console.log("data",productData.inCart);
-                        
-                            if (isOnCart) {
-                                await removeCartItem(productData._id || "");
-                                reloadHeader();
-                                setIsOnCart(false);
-                                return;
-                            }
-                            await AddCart(productData._id || "");
-                            reloadHeader();
-                            setIsOnCart(true);
-                        }}
-                    />
-                    <Hoveritem
-                        icon={
-                            location.pathname === "/wishlist"
-                                ? favoriteRedIcon
-                                : fav
-                                ? favoriteRedIcon
-                                : favorite
-                        }
-                        onClick={async () => {
-                            setFav((prevFav) => !prevFav);
-                            await AddWishlist(productData._id || "");
-                            reload?.();
-                        }}
-                    /></>)}
+                    {checkToken() && (
+                        <>
+                            <Hoveritem
+                                icon={isOnCart ? fullbluecart : bluecart}
+                                onClick={async () => {
+                                    console.log("data", productData.inCart);
+
+                                    if (isOnCart) {
+                                        await removeCartItem(
+                                            productData._id || ""
+                                        );
+                                        reloadHeader();
+                                        setIsOnCart(false);
+                                        return;
+                                    }
+                                    await AddCart(productData._id || "");
+                                    reloadHeader();
+                                    setIsOnCart(true);
+                                }}
+                            />
+                            <Hoveritem
+                                icon={
+                                    location.pathname === "/wishlist"
+                                        ? favoriteRedIcon
+                                        : fav
+                                        ? favoriteRedIcon
+                                        : favorite
+                                }
+                                onClick={async () => {
+                                    setFav((prevFav) => !prevFav);
+                                    await AddWishlist(productData._id || "");
+                                    reload?.();
+                                }}
+                            />
+                        </>
+                    )}
                     <Hoveritem
                         icon={bluepluse}
                         onClick={() => {
