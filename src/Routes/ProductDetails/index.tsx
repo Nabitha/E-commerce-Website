@@ -9,11 +9,13 @@ import blueCartIcon from "../../Asset/blueCartIcon.svg";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import useFetch from "../../Hooks/useFetch";
 import useAppContext from "../../Hooks/useAppContext";
+import Product from "../../Components/Product"
+
 import {
     AboutProduct,
-    Addcart,
-    removecartItem,
-    Addwishlist,
+    AddCart,
+    removeCartItem,
+    AddWishlist,
     relatedProducts
 } from "../../Services";
 import { checkToken } from "../../Components/Layout";
@@ -31,10 +33,7 @@ const ProductDetails = () => {
         relatedProducts(details?.categoryName)
     );
     const navigate = useNavigate();
-
-    if (error) return <div>error 404</div>;
-    if (loading)
-        return <div className="bg-blue-500 text-red-500">Loading . . . </div>;
+    const { reload: reloadHeader } = useAppContext();
     return (
         <div className="grid gap-10 place-items-center m-4">
             <div
@@ -70,6 +69,7 @@ const ProductDetails = () => {
                                 className="flex p-2 gap-5 justify-center shadow-md hover:cursor-pointer w-fit bg-violet-200 rounded-sm"
                                 onClick={() => {
                                     navigate(`/cart`);
+                                    
                                 }}
                             >
                                 Go to Cart
@@ -81,7 +81,8 @@ const ProductDetails = () => {
                                 className="flex p-2 gap-5 justify-center shadow-md hover:cursor-pointer w-fit rounded-sm"
                                 onClick={async () => {
                                     if (checkToken()) {
-                                        await Addcart(details?._id);
+                                        await AddCart(details?._id);
+                                        reloadHeader()
                                     } else navigate("/login");
                                     reload();
                                 }}
@@ -95,7 +96,7 @@ const ProductDetails = () => {
                             className="flex p-2 gap-5 justify-center shadow-md hover:cursor-pointer w-fit rounded-sm"
                             onClick={async () => {
                                 if (checkToken()) {
-                                    await Addwishlist(details?._id);
+                                    await AddWishlist(details?._id);
                                     reload();
                                 } else navigate("/login");
                             }}
@@ -141,15 +142,10 @@ const ProductDetails = () => {
                 <div className="text-2xl font-semibold"> related products</div>
                 <div className="grid grid-flow-row gap-10 pt-6 sm:grid-cols-2 lg:grid-cols-4">
                     {related?.map((item: any, index: number) => (
-                        <div
-                            key={index}
-                            onClick={() => {
-                                console.log(item);
-                                navigate(`/productDetails/${item?._id}`);
-                            }}
-                        >
-                            <img src={item.image} alt="" />
-                        </div>
+                     
+                      <Product key={index} productData={item} reload={reload} />
+                          
+                        
                     ))}
                 </div>
             </div>

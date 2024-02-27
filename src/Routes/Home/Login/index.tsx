@@ -4,19 +4,23 @@ import { ValidateLogin, validateRegister } from "../../../Validation";
 import { HomePageScreen } from "../../../Components/Screens/HomePageScreen";
 import { Link, useNavigate } from "react-router-dom";
 import { loginCall } from "../../../Services";
+import useAppContext from "../../../Hooks/useAppContext";
 
 export const Login = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { reload: reloadHeader } = useAppContext();
+
 
   const onSubmit = async (data: object) => {
     const res = await loginCall(data);
     if (!res.status) {
-  setError(res.message)
-      return false;
+        setError(res.message)
+        return false;
     }
     localStorage.setItem("token", res.data.token);
     navigate(-1);
+    reloadHeader();
 
     return true;
   };

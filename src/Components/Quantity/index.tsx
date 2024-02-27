@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {cartupdate} from "../../Services"
+import {cartUpdate} from "../../Services"
 interface PropsTypes{
     quantity:number
     id:any
@@ -7,7 +7,7 @@ interface PropsTypes{
 const quantity =({quantity,id}:PropsTypes)=>{
     const [value, setValue] = useState<number>(quantity);
     const handleCartCount = async(itemCount:number) => {
-        const res = await cartupdate(id,itemCount)
+        const res = await cartUpdate(id,itemCount)
         if (res.status)
             setValue(itemCount);
     };
@@ -19,7 +19,7 @@ const quantity =({quantity,id}:PropsTypes)=>{
          onChange={(e) => setValue(Number(e.target.value))}
  
            className="w-8 text-center border rounded"/>
-        <button className="border border px-2 rounded-full" onClick={()=>handleCartCount(value+1)}>+</button>
+        <button className="border px-2 rounded-full" onClick={()=>handleCartCount(value+1)}>+</button>
       </span>
     )
 }

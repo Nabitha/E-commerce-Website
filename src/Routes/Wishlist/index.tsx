@@ -1,6 +1,6 @@
 import Product from "../../Components/Product"
 import useFetch from "../../Hooks/useFetch"
-import { wishlistclear, wishlistdisplay } from "../../Services"
+import { wishlistClear, wishlistDisplay } from "../../Services"
 import Button from "../../Components/Button"
 import buffer from "../../Assets/images/buffer.svg"
 const Wishlist = () =>{
@@ -9,12 +9,12 @@ const Wishlist = () =>{
     productName: string;
     price: string | number;
     _id?: string;
-    wishstatus?: boolean;
-    cartstatus: boolean;    
+    inWishlist?: boolean;
+    inCart: boolean;    
 }[]>(
-    wishlistdisplay )
+    wishlistDisplay )
     const onWishlist = async ()=>{
-        const res = await wishlistclear();
+        const res = await wishlistClear();
         if(res.status){
             reload();
         }

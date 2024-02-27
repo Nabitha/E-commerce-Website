@@ -1,7 +1,7 @@
 import Hoveritem from "../../Components/Hoverimg";
 import { useState } from "react";
-import { Addcart, removecartItem } from "../../Services";
-import { Addwishlist } from "../../Services";
+import { AddCart, removeCartItem } from "../../Services";
+import { AddWishlist } from "../../Services";
 import { useNavigate } from "react-router-dom";
 import favorite from "../../Asset/favoriteIcon.svg";
 import favoriteRedIcon from "../../Asset/favoriteRedIcon.svg";
@@ -41,14 +41,15 @@ const Product = ({
                 <div className="absolute left-4 bottom-3 grid gap-2 hidden group-hover:grid ">
                     {checkToken()&&(<><Hoveritem
                         icon={isOnCart ? fullbluecart : bluecart}
-                        onClick={async () => {
+                        onClick={async () => { console.log("data",productData.inCart);
+                        
                             if (isOnCart) {
-                                await removecartItem(productData._id || "");
+                                await removeCartItem(productData._id || "");
                                 reloadHeader();
                                 setIsOnCart(false);
                                 return;
                             }
-                            await Addcart(productData._id || "");
+                            await AddCart(productData._id || "");
                             reloadHeader();
                             setIsOnCart(true);
                         }}
@@ -63,7 +64,7 @@ const Product = ({
                         }
                         onClick={async () => {
                             setFav((prevFav) => !prevFav);
-                            await Addwishlist(productData._id || "");
+                            await AddWishlist(productData._id || "");
                             reload?.();
                         }}
                     /></>)}

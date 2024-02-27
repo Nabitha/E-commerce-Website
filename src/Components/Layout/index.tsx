@@ -1,4 +1,4 @@
-import { cartItemCount, getUser,productlist } from "../../Services";
+import { cartItemCount, getUser,getProductList } from "../../Services";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Button from "../Button";
 import login from "../../Assets/images/carbon_user.svg";
@@ -8,8 +8,8 @@ import logo from "../../Assets/images/Hekto.svg";
 import search from "../../Assets/images/uil_search.svg";
 import fb from "../../Assets/images/fb.svg";
 import x from "../../Assets/images/X.svg";
-import pinkcart from "../../Assets/images/pinkcart.svg";
-import instagram from "../../Assets/images/insta.svg";
+import pinkCart from "../../Assets/images/pinkCart.svg";
+import instagram from "../../Assets/images/instagram.svg";
 import { useEffect, useState } from "react";
 import useFetch from "../../Hooks/useFetch";
 import AppContext from "../../Contexts/AppContext";
@@ -30,9 +30,9 @@ const Layout = ({ children }: PropsTypes) => {
     const [productName, setProductName] = useState("");
     const [pathName, setPathName] = useState("");
     const { data, reload: reloadCart } = useFetch<any>(cartItemCount);
-    const { data: user } = useFetch<any>(getUser);
+    const { data: user,reload:reloadUser } = useFetch<any>(getUser);
     const { data: productList, reload: reloadProductList } = useFetch<any>(
-        `${productlist}?search=${productName}`
+        `${getProductList}?search=${productName}`
     );
     useEffect(() => {
         setPathName(location.pathname);
@@ -40,11 +40,15 @@ const Layout = ({ children }: PropsTypes) => {
 
     const reload = () => {
         reloadCart();
+        reloadUser();
+        reloadProductList();
     };
+
+    
     const navigate = useNavigate();
     const Count =data;
     return (
-        <AppContext.Provider value={{ reload, productList }}>
+        <AppContext.Provider value={{ reload,productList }}>
             <div className="sticky top-0 z-50 bg-violet-600 text-white font-semibold flex items-center justify-around  py-4 pr-10">
                 <div className="flex items-center gap-16">
                     <span>
@@ -59,7 +63,7 @@ const Layout = ({ children }: PropsTypes) => {
                                     : " hover:text-pink-500"
                             }`}
                         >
-                            <Link to="/products">Products</Link>
+                            <Link to="/products" >Products</Link>
                         </span>
                     </span>
                 </div>
@@ -105,7 +109,7 @@ const Layout = ({ children }: PropsTypes) => {
               <Link to="/cart">
                 <img
                   className="w-6"
-                  src={pathName === "/cart" ? pinkcart : cart}
+                  src={pathName === "/cart" ? pinkCart : cart}
                 />
                 <div className="absolute flex items-center justify-center -right-3  -top-3 w-5 h-5 rounded-full bg-white   text-md text-pink-500 ">
                   <div> {data?.count||0}</div>
@@ -128,7 +132,7 @@ const Layout = ({ children }: PropsTypes) => {
       <div className="flex gap-96 py-2 justify-center"></div>
       <div className="p-8">{children}</div>
       <div className="pt-5">
-        <div className=" flex justify-center justify-around gap-12 bg-indigo-50 py-8 text-indigo-400">
+        <div className=" flex justify-around gap-12 bg-indigo-50 py-8 text-indigo-400">
           <div className="flex flex-col gap-2">
             <div className="text-2xl text-black font-medium">Catagories</div>
             <div>Laptops & Computers</div>

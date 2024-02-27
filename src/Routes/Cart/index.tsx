@@ -1,11 +1,11 @@
 import check from "../../Assets/images/check.svg";
 import closebutton from "../../Assets/images/xbutton.svg";
 import buffer from "../../Assets/images/buffer.svg";
-import { cartdisplay } from "../../Services";
+import { cartDisplay } from "../../Services";
 import useFetch from "../../Hooks/useFetch";
-import { cartclear } from "../../Services";
+import { cartClear } from "../../Services";
 import { checkout } from "../../Services";
-import { removecartItem } from "../../Services";
+import { removeCartItem } from "../../Services";
 import Button from "../../Components/Button";
 import { Fragment, useState } from "react";
 import Quantity from "../../Components/Quantity";
@@ -23,11 +23,12 @@ interface DataType{
   _id: any;
 }[]
 const Cart = () => {
-  const { data, reload,loading,error } = useFetch<DataType[]>(cartdisplay);
+  const { data, reload,loading,error } = useFetch<DataType[]>(cartDisplay);
   const onClearCart = async () => {
-    const res = await cartclear();
+    const res = await cartClear();
     if (res.status) {
       reload();
+      reloadHeader();
     }
   };
   const {
@@ -39,10 +40,11 @@ const Cart = () => {
     const check =await checkout();
     if(check.status){
       navigate('/ordercompleted');
+      reloadHeader();
     }
   };
   const updateCartFn = async (id: string) => {
-    const res = await removecartItem(id);
+    const res = await removeCartItem(id);
     if (res.status) {
       reload();
       reloadHeader()
