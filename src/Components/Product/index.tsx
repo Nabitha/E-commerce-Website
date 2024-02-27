@@ -11,21 +11,18 @@ import useAppContext from "../../Hooks/useAppContext";
 import { checkToken } from "../Layout";
 import HoverItem from "../HoverItem";
 interface PropsTypes {
-  productData:{
-    image: string;
-    productName: string;
-    price: string | number;
-    _id?: string;
-    inWishlist?: boolean;
-    inCart: boolean;
-  }
+    productData: {
+        image: string;
+        productName: string;
+        price: string | number;
+        _id?: string;
+        inWishlist?: boolean;
+        inCart: boolean;
+    };
     reload?: () => void;
 }
 
-const Product = ({
-    productData,
-    reload
-}: PropsTypes) => {
+const Product = ({ productData, reload }: PropsTypes) => {
     const { reload: reloadHeader } = useAppContext();
     const navigate = useNavigate();
     const [fav, setFav] = useState(productData.inWishlist);
@@ -38,6 +35,7 @@ const Product = ({
             }}
         >
             <div className="group relative bg-gray-100 grid place-items-center hover:bg-gray-300 h-60 w-60 ">
+<<<<<<< HEAD
                 <div className="absolute left-4 bottom-3  gap-2 hidden group-hover:grid ">
                     {checkToken()&&(<>< HoverItem
                         icon={isOnCart ? fullBlueCart : blueCart}
@@ -70,6 +68,47 @@ const Product = ({
                     /></>)}
                     < HoverItem
                         icon={zoomImage}
+=======
+                <div className="absolute left-4 bottom-3 grid gap-2 hidden group-hover:grid ">
+                    {checkToken() && (
+                        <>
+                            <Hoveritem
+                                icon={isOnCart ? fullbluecart : bluecart}
+                                onClick={async () => {
+                                    console.log("data", productData.inCart);
+
+                                    if (isOnCart) {
+                                        await removeCartItem(
+                                            productData._id || ""
+                                        );
+                                        reloadHeader();
+                                        setIsOnCart(false);
+                                        return;
+                                    }
+                                    await AddCart(productData._id || "");
+                                    reloadHeader();
+                                    setIsOnCart(true);
+                                }}
+                            />
+                            <Hoveritem
+                                icon={
+                                    location.pathname === "/wishlist"
+                                        ? favoriteRedIcon
+                                        : fav
+                                        ? favoriteRedIcon
+                                        : favorite
+                                }
+                                onClick={async () => {
+                                    setFav((prevFav) => !prevFav);
+                                    await AddWishlist(productData._id || "");
+                                    reload?.();
+                                }}
+                            />
+                        </>
+                    )}
+                    <Hoveritem
+                        icon={bluepluse}
+>>>>>>> ecb8c4b90d5ce09523b287f1f0717cc1c538c949
                         onClick={() => {
                             isZoom ? setIsZoom(false) : setIsZoom(true);
                         }}
