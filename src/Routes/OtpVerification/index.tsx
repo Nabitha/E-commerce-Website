@@ -8,7 +8,7 @@ import { HomePageScreen } from '../../Components/Screens/HomePageScreen';
 export const OtpVerification = () => {
     const { state } = useLocation();
     useEffect(() => {
-        if (!state?.email) navigate('/forgotpassword');
+        if (!state?.email) navigate('/forgotPassword');
     }, [state?.email]);
     const [error, setError] = useState('');
     const [serverError, setSeverError] = useState<any>(null);
@@ -23,10 +23,10 @@ export const OtpVerification = () => {
      if (!res.status) {
       res.data.forEach(
         ({ path, message }: { path: string; message: string }) => {
-          if (path === "all") {console.log(message);
-          
+          if (path === "all") 
+            {   
             setError(message);
-          }
+        }
         },
       );
       return false;

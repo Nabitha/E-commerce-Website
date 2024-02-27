@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Form from "../../../Components/InfraStructure/Form";
-import { ValidateLogin, validateRegister } from "../../../Validation";
+import { ValidateLogin } from "../../../Validation";
 import { HomePageScreen } from "../../../Components/Screens/HomePageScreen";
 import { Link, useNavigate } from "react-router-dom";
 import { loginCall } from "../../../Services";
@@ -51,7 +51,7 @@ export const Login = () => {
         afterFormSection={
           <div className="text-slate-400 text-xs p-4 text-left font-normal">
             <div>
-              <Link to="/forgotpassword">Forgot Password?</Link>
+              <Link to="/forgotPassword">Forgot Password?</Link>
             </div>
           </div>
         }
