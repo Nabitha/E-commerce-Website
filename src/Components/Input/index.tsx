@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { InputFieldType } from "../../Types/PropsTypes";
 import Label from "../Input/Components/Label";
 import Layout from "../Input/Components/Layout";
+import { InputOtp } from "../InputOtp";
 
 type PropsTypes = {
   type?: InputFieldType;
@@ -15,6 +16,8 @@ type PropsTypes = {
   disabled?: boolean;
   onChange: (value: string, e: any) => void;
   submitted?: boolean;
+  placeholder?:string;
+  onPaste?: (event: React.ClipboardEvent<HTMLInputElement>) => void;
 };
 
 const InputField = ({
@@ -22,24 +25,30 @@ const InputField = ({
   label,
   error,
   value,
+  placeholder,
   onChange,
   disabled = false,
   submitted = false,
+  onPaste,
+
 }: PropsTypes) => {
-  const [isBlurred, setIsBlurred] = useState<boolean>(false);
+    const [isBlurred, setIsBlurred] = useState<boolean>(false);
 
-  useEffect(() => {
-    setIsBlurred(submitted);
-  }, [submitted]);
+    useEffect(() => {
+        setIsBlurred(submitted);
+    }, [submitted]);
 
-  const onBlur = () => {
-    setIsBlurred(true);
-  };
+    const onBlur = () => {
+        setIsBlurred(true);
+    };
 
   return (
     <Layout error={error} isBlurred={isBlurred} type={type}>
-      <Label label={label} type={type} value={value} />
-      {type === "textarea" ? (
+       {type === 'otp' ? (
+                <InputOtp onChange={onChange} value={value} />
+   
+    
+      ):type === "textarea" ? (
         <textarea
           title={label}
           value={value}
@@ -56,6 +65,9 @@ const InputField = ({
           onChange={(e) => onChange(e.target.value, e)}
           disabled={disabled}
           onBlur={onBlur}
+          className="rounded-sm border w-full p-2 font-normal text-xs"
+          placeholder={placeholder}
+          onPaste={onPaste} 
         />
       )}
     </Layout>

@@ -1,84 +1,69 @@
+import { describe, test, expect, vi } from "vitest";
+import { render, waitFor } from "@testing-library/react";
+import DataViewer from "./DataViewer";
 
-import { describe, test, expect,vi } from 'vitest'
-import { render, waitFor} from '@testing-library/react'
-import DataViewer from './DataViewer'
+describe("<DataViewer />", () => {
+    test("Show Loading Screen", async () => {
+        const view = vi.fn();
+        const { getByText } = render(<DataViewer url="/data" view={view} />);
+        expect(getByText("Loading...")).toBeInTheDocument();
+    });
 
-describe('<DataViewer />', () => {
+    test("Data Viewer load now data", async () => {
+        const useFetch = await import("../../Hooks/useFetch");
 
-  test('Show Loading Screen', async() => {
-    const view = vi.fn();
-    const {getByText} = render(<DataViewer url='/data' view={view}/>)
-    expect(getByText("Loading...")).toBeInTheDocument();
-  })
+        useFetch.default = vi.fn().mockReturnValue({});
 
-  test('Data Viewer load now data', async() => {
-    
-    const useFetch = await import("../../Hooks/useFetch");
+        const view = vi.fn();
 
-    useFetch.default = vi.fn().mockReturnValue({})
+        const { getByText } = render(<DataViewer url="/data" view={view} />);
 
-    const view = vi.fn();
+        await waitFor(() => expect(useFetch.default).toHaveBeenCalledTimes(1));
 
-    const {getByText} = render(<DataViewer url='/data' view={view}/>)
+        expect(useFetch.default).toHaveBeenCalledWith("/data");
 
-    await waitFor(() => expect(useFetch.default).toHaveBeenCalledTimes(1))
+        expect(getByText("Nothing to Show")).toBeInTheDocument();
+    });
 
-    expect(useFetch.default).toHaveBeenCalledWith(
-      "/data"
-    )
-  
-    expect(getByText("Nothing to Show")).toBeInTheDocument()
+    test("Render Error", async () => {
+        const useFetch = await import("../../Hooks/useFetch");
 
-  })
+        useFetch.default = vi.fn().mockReturnValue({
+            error: {
+                message: "Error While Loading"
+            }
+        });
 
-  test('Render Error', async() => {
-    
-    const useFetch = await import("../../Hooks/useFetch");
+        const view = vi.fn();
 
-    useFetch.default = vi.fn().mockReturnValue({
-      error: {
-        message: "Error While Loading"
-      }
-    })
+        const { getByText } = render(<DataViewer url="/data" view={view} />);
 
-    const view = vi.fn();
+        await waitFor(() => expect(useFetch.default).toHaveBeenCalledTimes(1));
 
-    const {getByText} = render(<DataViewer url='/data' view={view}/>)
+        expect(useFetch.default).toHaveBeenCalledWith("/data");
 
-    await waitFor(() => expect(useFetch.default).toHaveBeenCalledTimes(1))
+        expect(getByText("Error While Loading")).toBeInTheDocument();
+    });
 
-    expect(useFetch.default).toHaveBeenCalledWith(
-      "/data"
-    )
-  
-    expect(getByText("Error While Loading")).toBeInTheDocument()
+    test("Render View", async () => {
+        const useFetch = await import("../../Hooks/useFetch");
 
-  })
+        const data = [
+            {
+                name: "Afsal"
+            }
+        ];
+        useFetch.default = vi.fn().mockReturnValue({
+            data: data
+        });
 
-  test('Render View', async() => {
-    
-    const useFetch = await import("../../Hooks/useFetch");
+        const view = vi.fn();
 
-    const data = [
-      {
-        name: "Afsal"
-      }
-    ]
-    useFetch.default = vi.fn().mockReturnValue({
-      data: data
-    })
+        render(<DataViewer url="/data" view={view} />);
 
-    const view = vi.fn();
+        await waitFor(() => expect(useFetch.default).toHaveBeenCalledTimes(1));
 
-    render(<DataViewer url='/data' view={view}/>)
-
-    await waitFor(() => expect(useFetch.default).toHaveBeenCalledTimes(1))
-
-    expect(useFetch.default).toHaveBeenCalledWith(
-      "/data"
-    )
-    expect(view).toBeCalledWith({data})
-
-  })
-
+        expect(useFetch.default).toHaveBeenCalledWith("/data");
+        expect(view).toBeCalledWith({ data });
+    });
 });

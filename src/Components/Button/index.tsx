@@ -1,27 +1,54 @@
-type ButtonType = 'Primary' | 'Secondary' | 'Inline';
+import { useMemo } from "react";
+import useAppContext from "../../Hooks/useAppContext";
+
+
+type ButtonType = 'Primary' | 'Secondary' | 'Inline' | 'checkout';
 
 interface PropsTypes {
-  label: String;
-  type?: ButtonType;
-  onClick?: () => void;
-  action?: 'submit' | 'button';
-  disabled?: boolean;
-  loading?: boolean;
+    label: String;
+    type?: ButtonType;
+    onClick?: () => void;
+    action?: "submit" | "button";
+    disabled?: boolean;
+    loading?: boolean;
 }
 
 const Button = ({
-  label,
-  type = 'Primary',
-  onClick,
-  action = 'button',
-  disabled = false,
-  loading = false,
+    label,
+    type = "Primary",
+    onClick,
+    action = "button",
+    disabled = false,
+    loading = false
 }: PropsTypes) => {
+  const {
+    reload: reloadHeader
+} = useAppContext()
+  const getStyle = useMemo(
+    () =>
+    ({
+      
+      Primary: `bg-pink-500 p-2 text-base w-full rounded-sm
+    text-white cursor-pointer hover:opacity-90
+    transition-all `,
+      Inline: `text-black bg-pink-500 p-2 rounded-sm
+  text-white cursor-pointer hover:opacity-90
+  transition-all`,
+      Secondary:
+          'text-slate-700 p-3  cursor-pointer hover:opacity-90',
+          checkout: 'bg-green-500 w-full text-white p-1 rounded'
+  })[type],
+[type]
+);
 
   return (
     <button
-      className=""
-      onClick={() => !loading && onClick?.()}
+    className={getStyle}
+      onClick={() => {if (!loading)
+        {
+          onClick?.();
+          reloadHeader()
+        }}}
       type={action}
       disabled={loading || disabled}
     >

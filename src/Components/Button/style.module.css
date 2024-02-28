@@ -7,8 +7,8 @@
 .successButton {
     width: 100%;
     padding: 0.5rem 2rem;
-    background-color: #6165D7;
-    color: #FFFFFF;
+    background-color: #6165d7;
+    color: #ffffff;
     font-size: 0.9rem;
     border: none;
     border-radius: 0.3rem;
@@ -27,8 +27,7 @@
     width: auto;
     background-color: transparent;
     color: rgba(19, 19, 201, 0.5);
-    ;
-    border: 1px solid #6165D7;
+    border: 1px solid #6165d7;
     border-radius: 4px;
     font-weight: 500;
 }
@@ -41,19 +40,19 @@
 .darkBlueContainer,
 .grayContainer,
 .successButton {
-    background-color: #6D17C9;
+    background-color: #6d17c9;
     border-radius: 1.6rem;
     padding: 0.8rem 1rem;
     font-size: medium;
 }
 
 .grayContainer {
-    background-color: #908DA6;
+    background-color: #908da6;
 }
 
 .successButton {
-    background-color: #1AC568;
-    color: #FFFFFF;
+    background-color: #1ac568;
+    color: #ffffff;
 }
 
 .loadingContainer {
@@ -61,7 +60,6 @@
 }
 
 @media screen and (max-width: 420px) {
-
     .container,
     .secondaryContainer,
     .inlineContainer {
